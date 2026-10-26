@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>編輯排版國手培訓庫</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap">
+<style>
+/* Layout: studio-portfolio sheet — sparse four-column top bar of tiny caps labels, oversized light lowercase display, hairline rows instead of boxes, generous air */
+:root{
+  --bg:#dedad0; --bg2:#e6e3db; --ink:#111111; --ink2:#5d5a52; --rule:#bdb8ac; --accent:#263b1c; --accent-bg:#cfd3c0; --warn:#8c2a14;
+  --f-display:"Inter Tight","Helvetica Neue",Helvetica,"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  --f-body:"Inter Tight","Helvetica Neue",Helvetica,"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141612;--bg2:#1b1e18;--ink:#e7e3d9;--ink2:#9e9a8f;--rule:#3a3d34;--accent:#b5cc98;--accent-bg:#2a3522;--warn:#f0a487;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141612;--bg2:#1b1e18;--ink:#e7e3d9;--ink2:#9e9a8f;--rule:#3a3d34;--accent:#b5cc98;--accent-bg:#2a3522;--warn:#f0a487;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+@media(max-width:600px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+a{color:inherit;text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--accent);outline-offset:3px}
+.cap{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;line-height:1.35;font-weight:400}
+.cap.mute,.mute{color:var(--ink2)}
+/* top bar */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.topgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-block:14px 12px;align-items:start}
+.tabrow{display:flex;flex-direction:column;gap:1px;align-items:flex-start}
+.tabrow button{border:0;background:none;padding:0;cursor:pointer;text-align:left;color:var(--ink2)}
+.tabrow button sup{font-size:9px;margin-left:3px}
+.tabrow button[aria-selected="true"]{color:var(--ink)}
+.tabrow button[aria-selected="true"]::before{content:"● ";font-size:8px;vertical-align:2px;color:var(--accent)}
+.clock{text-align:right;justify-self:end}
+@media(max-width:760px){.topgrid{grid-template-columns:1fr 1fr}.topgrid .hide-s{display:none}.tabrow{flex-direction:row;flex-wrap:wrap;gap:4px 12px;grid-column:1/-1;order:3}}
+/* hero */
+.hero{padding-block:9vh 7vh}
+.hero h1{font-family:var(--f-display);font-weight:300;font-size:clamp(46px,8.2vw,128px);line-height:.92;letter-spacing:-.045em;margin:0;text-transform:lowercase}
+.hero h1 .zh{display:block;font-family:"Noto Sans TC",var(--f-display);font-size:.42em;letter-spacing:-.01em;font-weight:300;margin-top:.35em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.herofoot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:6vh;align-items:end}
+.herofoot p{margin:0;max-width:44ch;grid-column:span 2;font-size:17px;font-weight:300;line-height:1.5;letter-spacing:-.005em}
+@media(max-width:760px){.herofoot{grid-template-columns:1fr 1fr}.herofoot p{grid-column:1/-1}}
+main{padding-block:0 80px}
+section[hidden]{display:none}
+.sechead{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;border-top:1px solid var(--ink);padding-top:12px;margin-bottom:34px}
+.sechead h2{grid-column:span 2;margin:0;font-weight:300;font-size:clamp(38px,5vw,72px);line-height:.95;letter-spacing:-.04em;text-transform:lowercase}
+.sechead h2 small{display:block;font-family:"Noto Sans TC",var(--f-body);font-size:16px;letter-spacing:0;font-weight:400;margin-top:12px;color:var(--ink2)}
+.sechead p{grid-column:span 2;margin:0;max-width:52ch;color:var(--ink2);font-size:14.5px}
+@media(max-width:760px){.sechead{grid-template-columns:1fr}.sechead h2,.sechead p{grid-column:auto}}
+/* controls */
+.bar{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.search{flex:1 1 280px;min-width:0;padding:10px 0;border:0;border-bottom:1px solid var(--ink);background:transparent;font-size:20px;font-weight:300;letter-spacing:-.01em;border-radius:0}
+.search::placeholder{color:var(--ink2);opacity:.8}
+.chip{border:0;background:none;padding:2px 0;cursor:pointer;color:var(--ink2);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+.chip[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+select.chip{border-bottom:1px solid var(--rule)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:999px;cursor:pointer;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.small{font-size:12.5px;color:var(--ink2)}
+.notice{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:12px 0;color:var(--ink2);margin-bottom:28px;font-size:13.5px}
+.notice b{color:var(--ink);font-weight:500}
+/* glossary */
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));column-gap:24px}
+.term{border-top:1px solid var(--rule);padding:12px 0 18px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.term .en{font-size:21px;font-weight:300;letter-spacing:-.02em;line-height:1.15;word-break:break-word}
+.term .zh{font-family:"Noto Sans TC",var(--f-body);font-size:15px;font-weight:500}
+.term .meta{display:flex;gap:4px 12px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.tag{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+.tag.cat{color:var(--accent)}
+.tag.wda{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.tag.team{background:var(--accent);color:var(--bg);padding:1px 6px;border-radius:999px}
+.term .note{font-size:12.5px;color:var(--warn);margin-top:6px;line-height:1.5}
+.quiz .term .zh{filter:blur(6px);cursor:pointer;transition:filter .15s}.quiz .term.show .zh{filter:none}
+@media (prefers-reduced-motion:reduce){.quiz .term .zh{transition:none}}
+.count{font-size:11.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+/* forms */
+details.add{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:28px}
+details.add summary{cursor:pointer;padding:14px 0;list-style:none;display:flex;justify-content:space-between;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+details.add summary::-webkit-details-marker{display:none}
+details.add summary:after{content:"+";font-size:20px;font-weight:300;line-height:1}details.add[open] summary:after{content:"–"}
+form.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px 20px;padding:4px 0 20px}
+form.grid label{display:flex;flex-direction:column;gap:4px;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);grid-column:span 12}
+@media(min-width:760px){.s3{grid-column:span 3!important}.s4{grid-column:span 4!important}.s6{grid-column:span 6!important}.s8{grid-column:span 8!important}}
+form.grid input,form.grid select,form.grid textarea{border:0;border-bottom:1px solid var(--ink2);background:transparent;border-radius:0;padding:7px 0;color:var(--ink);font-size:15px;width:100%;text-transform:none;letter-spacing:0}
+form.grid textarea{min-height:64px;resize:vertical}
+form.grid select option{background:var(--bg)}
+.formfoot{grid-column:span 12;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.err{color:var(--warn);font-size:13px}
+/* rows */
+.list{display:flex;flex-direction:column}
+.card{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
+.list .card{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 16px}
+.list .card>*{grid-column:2/-1;min-width:0}
+.list .card>.top{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:baseline}
+.card .yr{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+.card h3{margin:0;font-size:30px;font-weight:300;letter-spacing:-.03em;line-height:1.05;grid-column:span 2}
+.card .ev{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);text-align:right}
+@media(max-width:760px){.list .card,.list .card>.top{grid-template-columns:1fr}.list .card>*{grid-column:1/-1}.card h3{grid-column:auto}.card .ev{text-align:left}}
+.kv{display:grid;grid-template-columns:8em minmax(0,1fr);gap:6px 16px;margin:6px 0 0;font-size:14.5px}
+.kv dt{color:var(--ink2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:3px}.kv dd{margin:0;word-break:break-word;white-space:pre-wrap}
+.tags{display:flex;gap:4px 14px;flex-wrap:wrap}
+.tags .tag{color:var(--ink);font-size:12px;text-transform:none;letter-spacing:0}
+.card .acts{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.linkbtn{background:none;border:0;cursor:pointer;padding:0;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
+.linkbtn.danger{color:var(--warn)}
+.thread{margin-top:8px;border-top:1px dotted var(--rule);padding-top:12px;display:flex;flex-direction:column;gap:12px}
+.post{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px}
+.post img{width:24px;height:24px;border-radius:50%}
+.post .who{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}.post .who span{color:var(--ink2);margin-left:8px}
+.post .txt{white-space:pre-wrap;word-break:break-word;font-size:15px}
+.reply{display:flex;gap:12px;align-items:flex-end}.reply textarea{flex:1;min-width:0;border:0;border-bottom:1px solid var(--ink2);background:transparent;padding:7px 0;min-height:38px;resize:vertical;font-size:15px}
+.empty{border-top:1px solid var(--rule);padding:28px 0;color:var(--ink2)}
+.empty b{display:block;color:var(--ink);font-size:26px;font-weight:300;letter-spacing:-.025em;margin-bottom:6px}
+/* trends */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 32px}
+.panel{border-top:1px solid var(--rule);padding:14px 0 28px;min-width:0}
+.panel h4{margin:0 0 14px;font-size:11.5px;font-weight:400;text-transform:uppercase;letter-spacing:.04em}
+.bars{display:flex;flex-direction:column;gap:8px}
+.brow{display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr) 2.2em;gap:10px;align-items:center;font-size:13.5px}
+.brow .lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .track{height:2px;background:var(--rule)}
+.brow .fill{display:block;height:2px;background:var(--ink)}
+.brow .fill.hot{background:var(--accent);height:4px;margin-top:-1px}
+.brow .v{font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+.pred{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.pred li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:12px;align-items:baseline;font-size:17px;font-weight:300;letter-spacing:-.01em}
+.pill{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;font-weight:400}
+.pill.up,.pill.new{color:var(--accent)}.pill.st{color:var(--ink2)}.pill.down{color:var(--warn)}
+.frame{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:0 24px;margin:0;padding:0;list-style:none;counter-reset:f}
+.frame li{border-top:1px solid var(--rule);padding:12px 0 22px;font-size:14px;color:var(--ink2);counter-increment:f}
+.frame li b{display:block;font-size:24px;font-weight:300;letter-spacing:-.025em;color:var(--ink);margin-bottom:6px}
+.frame li b::before{content:counter(f,decimal-leading-zero) ". ";font-size:11.5px;letter-spacing:.04em;vertical-align:6px;color:var(--ink2)}
+.sub2{margin-top:56px}
+/* resources */
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:24px}
+.res .card a.t{font-size:22px;font-weight:300;letter-spacing:-.02em;line-height:1.15;text-decoration:none;word-break:break-word;display:block;margin:6px 0 4px}
+.res .card a.t:hover{text-decoration:underline}
+.res .host{font-size:11px;color:var(--ink2);word-break:break-all;text-transform:uppercase;letter-spacing:.04em}
+footer{border-top:1px solid var(--ink);padding-block:14px 40px;color:var(--ink2);font-size:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+footer p{margin:0;grid-column:span 2}
+@media(max-width:760px){footer{grid-template-columns:1fr}footer p{grid-column:auto}}
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap topgrid">
+  <div class="cap">worldskills<br><span class="mute">職類 15 · 編輯排版</span></div>
+  <div class="cap hide-s mute" id="who">國手培訓資源<br>training archive</div>
+  <div class="tabrow cap" role="tablist" id="tabs">
+    <button role="tab" data-t="terms" aria-selected="true">glossary 術語庫<sup id="n-terms"></sup></button>
+    <button role="tab" data-t="exams" aria-selected="false">archive 歷屆考題<sup id="n-exams"></sup></button>
+    <button role="tab" data-t="trends" aria-selected="false">forecast 趨勢預測</button>
+    <button role="tab" data-t="resources" aria-selected="false">resources 資源庫<sup id="n-res"></sup></button>
+    <button role="tab" data-t="talk" aria-selected="false">discussion 討論區<sup id="n-talk"></sup></button>
+  </div>
+  <div class="cap clock"><span class="mute">taipei time</span><br><span id="clock">—</span></div>
+</div></nav>
+
+<header class="wrap hero">
+  <h1>editorial <em>layout</em><span class="zh">編輯排版國手培訓庫</span></h1>
+  <div class="herofoot">
+    <p>把國際命題用語、歷屆考題、參考資源與討論放在同一處。考題登錄得越完整，趨勢預測越能看出下一屆可能的出題方向。</p>
+    <div class="cap mute">indesign · illustrator · photoshop</div>
+    <div class="cap" style="text-align:right">abilympics · worldskills<br><span class="mute">national selection</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="notice" id="dbnote" hidden></div>
+
+  <section id="sec-terms">
+    <div class="sechead"><h2>glossary<small>中英術語庫</small></h2><p>國際賽的題目卷、技術規範和評分表都用英文寫。這裡收錄國教院樂詞網「藝術學名詞」「設計學名詞」中與編輯排版相關的術語，以及勞動部勞動力發展署雙語詞彙裡的競賽、技能檢定、印前用語，團隊也可以自行補充。</p></div>
+    <div class="bar">
+      <input class="search" id="q" type="search" placeholder="搜尋 bleed、字距、imposition……" aria-label="搜尋術語">
+      <button class="btn ghost" id="quizBtn" aria-pressed="false">遮住中文練習</button>
+      <span class="count" id="tcount"></span>
+    </div>
+    <div class="bar" id="cats"></div>
+    <details class="add" id="addTerm"><summary>補充一個術語</summary>
+      <form class="grid" id="termForm">
+        <label class="s4">英文<input id="t-en" required maxlength="120" placeholder="e.g. baseline grid"></label>
+        <label class="s4">中文<input id="t-zh" required maxlength="120" placeholder="基線網格"></label>
+        <label class="s4">分類<select id="t-c"></select></label>
+        <label>說明／出題情境（選填）<textarea id="t-n" maxlength="600" placeholder="在哪一屆題目看到、評分表怎麼寫、常見誤譯……"></textarea></label>
+        <div class="formfoot"><button class="btn" type="submit">加入術語庫</button><span class="err" id="t-err"></span></div>
+      </form>
+    </details>
+    <div class="terms" id="termList"></div>
+  </section>
+
+  <section id="sec-exams" hidden>
+    <div class="sechead"><h2>archive<small>歷屆考題資料庫</small></h2><p>已內建 2014–2026 全國身障賽 7 屆、國際展能節第 9、10 屆，以及全國技能競賽平面設計技術 2 份考題，內容取自原始試題與評分表。團隊可以繼續登錄新考題；「成品類型」和「關鍵字」用逗號分隔，趨勢預測會拿這兩欄來統計。</p></div>
+    <details class="add" id="addExam"><summary>登錄一份考題</summary>
+      <form class="grid" id="examForm">
+        <label class="s3">年度<input id="e-year" type="number" min="1980" max="2100" required placeholder="2026"></label>
+        <label class="s3">賽事<select id="e-event"><option>國際展能節</option><option>全國身心障礙者技能競賽</option><option>國手選拔賽</option><option>WorldSkills 國際技能競賽</option><option>全國技能競賽</option><option>模擬題／自編練習</option><option>其他</option></select></label>
+        <label class="s6">題目名稱／情境<input id="e-title" required maxlength="160" placeholder="例：某品牌年度型錄與展覽 DM"></label>
+        <label class="s6">成品類型（逗號分隔）<input id="e-deliv" maxlength="300" placeholder="型錄, 摺頁, 海報, 名片, 書籍封面, 雜誌跨頁"></label>
+        <label class="s3">指定軟體<input id="e-sw" maxlength="120" placeholder="InDesign, Illustrator"></label>
+        <label class="s3">競賽時間（小時）<input id="e-hrs" type="number" min="0" max="48" step="0.5" placeholder="6"></label>
+        <label class="s6">關鍵字／技能點（逗號分隔）<input id="e-kw" maxlength="400" placeholder="網格系統, 主頁, 段落樣式, 出血, 跨頁, 拼版"></label>
+        <label class="s6">原始資料連結（選填）<input id="e-url" type="url" maxlength="500" placeholder="https://"></label>
+        <label>評分重點與觀察<textarea id="e-focus" maxlength="2000" placeholder="評分表的構面、配分、裁判特別在意的地方、選手常失分處……"></textarea></label>
+        <div class="formfoot"><button class="btn" type="submit">登錄考題</button><span class="err" id="e-err"></span></div>
+      </form>
+    </details>
+    <div class="bar"><input class="search" id="eq" type="search" placeholder="搜尋題目、成品、關鍵字" aria-label="搜尋考題"><select id="ef" class="chip" aria-label="篩選賽事"><option value="">全部賽事</option></select></div>
+    <div class="list" id="examList"></div>
+  </section>
+
+  <section id="sec-trends" hidden>
+    <div class="sechead"><h2>forecast<small>鑑古知今：出題趨勢</small></h2><p>從已登錄的考題自動統計。「比例上升」把最近三個年度和更早的考題相比；術語熱度是術語庫的詞彙在考題內容裡出現的次數。</p></div>
+    <div id="trendBody"></div>
+    <div class="sechead sub2"><h2>process<small>拆題框架</small></h2><p>拿到一份新題目，或登錄歷屆考題時，依序從這六個面向拆解。</p></div>
+    <ol class="frame">
+      <li><b>情境與客戶</b>品牌、產業、目標讀者，題目給的文案與圖片素材量。</li>
+      <li><b>成品規格</b>開數、頁數、摺法、裝訂、出血、色彩模式、輸出格式（PDF/X）。</li>
+      <li><b>版面系統</b>網格欄數、邊界、基線、主頁、頁碼與書眉。</li>
+      <li><b>文字排印</b>字體搭配、字級層級、段落與字元樣式、中英混排、避頭尾。</li>
+      <li><b>影像與色彩</b>去背、修圖、解析度、CMYK 轉換、特別色、印前檢查。</li>
+      <li><b>時間與評分</b>各模組時間分配、客觀與主觀評分比重、常見扣分點。</li>
+    </ol>
+  </section>
+
+  <section id="sec-resources" hidden>
+    <div class="sechead"><h2>resources<small>資源庫</small></h2><p>技術規範、實施計畫、參考書、教學影片、範例作品。每筆資源都可以展開討論。</p></div>
+    <details class="add" id="addRes"><summary>新增一筆資源</summary>
+      <form class="grid" id="resForm">
+        <label class="s6">標題<input id="r-title" required maxlength="160"></label>
+        <label class="s6">連結<input id="r-url" type="url" required maxlength="500" placeholder="https://"></label>
+        <label class="s4">類型<select id="r-type"><option>技術規範／辦法</option><option>試題／樣題</option><option>術語／詞彙</option><option>參考書</option><option>教學影片／教程</option><option>範例作品</option><option>軟體技巧</option><option>其他</option></select></label>
+        <label class="s8">為什麼值得看（選填）<input id="r-note" maxlength="400"></label>
+        <div class="formfoot"><button class="btn" type="submit">加入資源庫</button><span class="err" id="r-err"></span></div>
+      </form>
+    </details>
+    <div class="bar" id="rcats"></div>
+    <div class="res" id="resList"></div>
+  </section>
+
+  <section id="sec-talk" hidden>
+    <div class="sechead"><h2>discussion<small>討論區</small></h2><p>不屬於特定考題或資源的話題放這裡：訓練進度、軟體版本、出題猜測。考題和資源底下的留言也會一起列出。</p></div>
+    <div class="card" id="talkBox" style="margin-bottom:10px">
+      <form id="talkForm" class="reply"><textarea id="talkText" maxlength="2000" placeholder="寫下想討論的事……" aria-label="新討論"></textarea><button class="btn" type="submit">發表</button></form>
+      <span class="err" id="talk-err"></span>
+    </div>
+    <div class="list" id="talkList"></div>
+  </section>
+</main>
+<footer class="wrap"><span class="cap">sources</span><p>術語：國家教育研究院樂詞網「藝術學名詞」「設計學名詞」雙語對照表；勞動部勞動力發展署「雙語詞彙」（wda.gov.tw，2026/10/26 擷取）。標示「注意」的條目，是業界慣用說法與樂詞網譯名不一致之處。</p><span class="cap" style="text-align:right">2026</span></footer>
+<script>
+const TERMS=[{"id":3608088,"s":["藝術學名詞"],"en":"block lettering","zh":"正楷字體；印刷字體","c":"type"},{"id":3608100,"s":["藝術學名詞","設計學名詞"],"en":"boldface","zh":"粗體字","c":"type"},{"id":3608591,"s":["藝術學名詞","設計學名詞"],"en":"font size","zh":"字級；字型大小","c":"type"},{"id":3608592,"s":["藝術學名詞"],"en":"font style","zh":"字型","c":"type"},{"id":3608772,"s":["藝術學名詞","設計學名詞"],"en":"italic","zh":"右斜體字；斜體；右斜體","c":"type"},{"id":3610022,"s":["藝術學名詞","設計學名詞"],"en":"kerning","zh":"字距；字距調整","c":"type"},{"id":3610052,"s":["藝術學名詞"],"en":"leading","zh":"行距","c":"type"},{"id":3610058,"s":["藝術學名詞"],"en":"lettering design","zh":"手寫字體設計","c":"type"},{"id":3610326,"s":["藝術學名詞"],"en":"printer font","zh":"列印字庫","c":"type"},{"id":3610400,"s":["藝術學名詞"],"en":"Roman alphabet","zh":"羅馬字母","c":"type"},{"id":9064141,"s":["藝術學名詞"],"en":"ligature","zh":"合字","c":"type"},{"id":9064292,"s":["藝術學名詞"],"en":"oblique","zh":"左斜體字","c":"type"},{"id":9064499,"s":["藝術學名詞"],"en":"sans-serif","zh":"無襯線（字體）","c":"type"},{"id":9064524,"s":["藝術學名詞"],"en":"serif","zh":"襯線（字體）","c":"type"},{"id":12018797,"s":["藝術學名詞"],"en":"backslant","zh":"左斜體字","c":"type"},{"id":21322254,"s":["藝術學名詞"],"en":"ascender","zh":"高於小寫字高部分（字體）","c":"type"},{"id":21322350,"s":["藝術學名詞"],"en":"bowl","zh":"碗形部分（字體）","c":"type"},{"id":21322378,"s":["藝術學名詞"],"en":"cap-height","zh":"大寫字高","c":"type"},{"id":21322537,"s":["藝術學名詞"],"en":"descender","zh":"低於小寫字高部分（字體）","c":"type"},{"id":21322700,"s":["藝術學名詞"],"en":"font family","zh":"字型家族","c":"type"},{"id":21323500,"s":["藝術學名詞"],"en":"spine","zh":"彎柱部分（字體）","c":"type"},{"id":21323509,"s":["藝術學名詞"],"en":"stem","zh":"直柱部分（字體）","c":"type"},{"id":21323590,"s":["藝術學名詞"],"en":"terminal","zh":"筆畫終端（字體）","c":"type"},{"id":21323657,"s":["藝術學名詞","設計學名詞"],"en":"typeface","zh":"字體","c":"type"},{"id":21323757,"s":["藝術學名詞"],"en":"x-height","zh":"小寫字高","c":"type"},{"id":21369739,"s":["藝術學名詞","設計學名詞"],"en":"readability","zh":"可讀性","c":"type"},{"id":9064132,"s":["藝術學名詞","設計學名詞"],"en":"legibility","zh":"明視性；易辨識性","c":"type","n":"設計學名詞譯「易辨識性」，與 readability（可讀性）常一起考"},{"id":3610051,"s":["藝術學名詞"],"en":"leaders","zh":"虛線；點線；導點（印刷）","c":"type"},{"id":7195216,"s":["設計學名詞"],"en":"capital","zh":"大寫字母；柱頭{建築}","c":"type"},{"id":7195217,"s":["設計學名詞"],"en":"caps","zh":"大寫字母","c":"type"},{"id":7195239,"s":["設計學名詞"],"en":"character","zh":"字符；角色；性格","c":"type"},{"id":7195610,"s":["設計學名詞"],"en":"font","zh":"字型","c":"type"},{"id":21340458,"s":["設計學名詞"],"en":"baseline","zh":"基線；基準","c":"type"},{"id":21340479,"s":["設計學名詞"],"en":"black letter","zh":"黑體字","c":"type","n":"注意：blackletter 一般譯「哥德體／黑字體」，並非中文「黑體」(sans-serif)"},{"id":21340489,"s":["設計學名詞"],"en":"block letters","zh":"印刷體；大寫正體字","c":"type"},{"id":21341732,"s":["設計學名詞"],"en":"typography","zh":"字型學；印刷術","c":"type"},{"id":21341741,"s":["設計學名詞"],"en":"upper-case","zh":"大寫字母","c":"type"},{"id":7196226,"s":["設計學名詞"],"en":"small caps","zh":"小型大寫字母","c":"type"},{"id":7196382,"s":["設計學名詞"],"en":"typestyle","zh":"字樣","c":"type"},{"id":21405929,"s":["藝術學名詞"],"en":"copy","zh":"文字；文稿","c":"type"},{"id":3609665,"s":["藝術學名詞"],"en":"copywriting","zh":"廣告文案","c":"type"},{"id":21340655,"s":["設計學名詞"],"en":"copywriter","zh":"文案撰稿者","c":"type"},{"id":3608397,"s":["藝術學名詞"],"en":"design layout","zh":"設計圖","c":"layout"},{"id":3608613,"s":["藝術學名詞"],"en":"gestalt psycology","zh":"完形心理學；格式塔心理學","c":"layout"},{"id":3608633,"s":["藝術學名詞","設計學名詞"],"en":"golden ratio","zh":"黃金比例","c":"layout"},{"id":3608634,"s":["藝術學名詞","設計學名詞"],"en":"golden section","zh":"黃金分割","c":"layout"},{"id":3608649,"s":["藝術學名詞","設計學名詞"],"en":"grid","zh":"格網；格線","c":"layout"},{"id":3609768,"s":["藝術學名詞"],"en":"editorial design","zh":"排版設計","c":"layout"},{"id":3609891,"s":["藝術學名詞","設計學名詞"],"en":"gutter","zh":"段落間隔（印刷）；裝訂線","c":"layout","n":"排版語境更常指「欄間距／裝訂邊」"},{"id":3609911,"s":["藝術學名詞"],"en":"head-to-foot arrangement","zh":"天地線排列法（印刷）","c":"layout"},{"id":3610185,"s":["藝術學名詞"],"en":"negative space","zh":"負空間","c":"layout"},{"id":3610251,"s":["藝術學名詞"],"en":"page-content heading","zh":"頁角標題","c":"layout"},{"id":9064489,"s":["藝術學名詞"],"en":"rule of thirds","zh":"三分構圖法；井字構圖法","c":"layout"},{"id":9064045,"s":["藝術學名詞"],"en":"interaction of text & image","zh":"文圖互動","c":"layout"},{"id":3609864,"s":["藝術學名詞"],"en":"gestalt perception","zh":"格式塔知覺","c":"layout"},{"id":21322742,"s":["藝術學名詞"],"en":"Gestalt principle of closure","zh":"格式塔封閉原則","c":"layout"},{"id":21323712,"s":["藝術學名詞"],"en":"visual hierarchy","zh":"視覺層次","c":"layout"},{"id":21369400,"s":["藝術學名詞"],"en":"layout","zh":"構圖","c":"layout","n":"藝術學名詞譯「構圖」；排版語境為「版面配置」"},{"id":12019761,"s":["藝術學名詞"],"en":"wireframe","zh":"線框稿；網格","c":"layout"},{"id":7195094,"s":["設計學名詞"],"en":"alignment","zh":"對齊；調整","c":"layout"},{"id":7195235,"s":["設計學名詞"],"en":"center spread","zh":"中間跨頁","c":"layout"},{"id":7195241,"s":["設計學名詞"],"en":"character grid","zh":"字符網格","c":"layout"},{"id":7195647,"s":["設計學名詞"],"en":"Gestalt psychology","zh":"完形心理學","c":"layout"},{"id":7195673,"s":["設計學名詞"],"en":"half-page spread","zh":"半跨頁","c":"layout"},{"id":7195769,"s":["設計學名詞"],"en":"inverted pyramid","zh":"倒金字塔","c":"layout"},{"id":21340453,"s":["設計學名詞"],"en":"backup space","zh":"額外版面{雜誌}；備份空間","c":"layout"},{"id":21341177,"s":["設計學名詞"],"en":"junior page","zh":"小全頁","c":"layout"},{"id":21341179,"s":["設計學名詞"],"en":"junior spread","zh":"跨頁式小全頁","c":"layout"},{"id":21341362,"s":["設計學名詞"],"en":"page four-color bleed{=P4CB}","zh":"彩色滿版廣告","c":"layout"},{"id":7195398,"s":["設計學名詞"],"en":"cover position","zh":"封面版位","c":"layout"},{"id":21322480,"s":["藝術學名詞","設計學名詞"],"en":"cropping","zh":"畫面剪裁；裁剪","c":"layout"},{"id":3608104,"s":["藝術學名詞"],"en":"book cover design","zh":"封面設計","c":"pub"},{"id":3608105,"s":["藝術學名詞"],"en":"booklet","zh":"小冊子","c":"pub"},{"id":3608115,"s":["藝術學名詞","設計學名詞"],"en":"brochure","zh":"宣傳小冊；手冊","c":"pub"},{"id":3608140,"s":["藝術學名詞","設計學名詞"],"en":"caption","zh":"插圖說明；圖表說明；標題；字幕","c":"pub"},{"id":3610053,"s":["藝術學名詞"],"en":"leaflet","zh":"單張","c":"pub"},{"id":9064424,"s":["藝術學名詞"],"en":"program","zh":"節目手冊","c":"pub"},{"id":9063624,"s":["藝術學名詞"],"en":"children's picture book","zh":"兒童圖畫書","c":"pub"},{"id":21322384,"s":["藝術學名詞"],"en":"casebound","zh":"精裝封面","c":"pub"},{"id":21322387,"s":["藝術學名詞"],"en":"catalog","zh":"圖錄；畫冊","c":"pub"},{"id":21322415,"s":["藝術學名詞"],"en":"clothbound","zh":"精裝封面；布面裝幀","c":"pub"},{"id":21322417,"s":["藝術學名詞"],"en":"colophon","zh":"跋；出版說明","c":"pub"},{"id":21322529,"s":["藝術學名詞"],"en":"deluxe binding","zh":"精裝","c":"pub"},{"id":21322783,"s":["藝術學名詞"],"en":"hardback","zh":"精裝封面","c":"pub"},{"id":21323488,"s":["藝術學名詞"],"en":"softbound","zh":"平裝封面","c":"pub"},{"id":21323768,"s":["藝術學名詞"],"en":"zine","zh":"誌；雜誌（獨立出版）","c":"pub"},{"id":21369742,"s":["藝術學名詞"],"en":"recto","zh":"書籍正面頁","c":"pub"},{"id":21370050,"s":["藝術學名詞"],"en":"verso","zh":"書籍反面頁","c":"pub"},{"id":12019019,"s":["藝術學名詞"],"en":"ephemera","zh":"一次性印刷；一次性物件","c":"pub"},{"id":7195058,"s":["設計學名詞"],"en":"accordion insert","zh":"折疊夾頁 {平面設計}","c":"pub"},{"id":7195168,"s":["設計學名詞"],"en":"book design","zh":"書籍設計；裝幀設計","c":"pub"},{"id":7195397,"s":["設計學名詞"],"en":"cover","zh":"封面","c":"pub"},{"id":7195399,"s":["設計學名詞"],"en":"cover wrap","zh":"封面書衣；書套","c":"pub"},{"id":7195625,"s":["設計學名詞"],"en":"front cover","zh":"封面{印刷品}；前蓋{產品}","c":"pub"},{"id":7195854,"s":["設計學名詞"],"en":"masthead","zh":"刊頭；報頭","c":"pub"},{"id":7195989,"s":["設計學名詞"],"en":"pop-up book","zh":"立體書","c":"pub"},{"id":21340443,"s":["設計學名詞"],"en":"back cover","zh":"封底{印刷品}；後蓋{產品}","c":"pub"},{"id":21340446,"s":["設計學名詞"],"en":"backbone","zh":"書背{印刷}；骨幹","c":"pub"},{"id":21340493,"s":["設計學名詞"],"en":"blow-in card","zh":"夾頁卡；插頁卡","c":"pub"},{"id":21340654,"s":["設計學名詞"],"en":"copyright page","zh":"版權頁","c":"pub"},{"id":21340782,"s":["設計學名詞"],"en":"drop folio","zh":"頁尾頁碼","c":"pub"},{"id":21340809,"s":["設計學名詞"],"en":"editor","zh":"編輯","c":"pub"},{"id":21340952,"s":["設計學名詞"],"en":"first edition","zh":"初版","c":"pub"},{"id":21340971,"s":["設計學名詞"],"en":"flexies","zh":"夾頁織帶","c":"pub"},{"id":21341010,"s":["設計學名詞"],"en":"gatefold","zh":"摺頁{廣告}","c":"pub"},{"id":21341137,"s":["設計學名詞"],"en":"inside back cover {=IBC}","zh":"封底內頁；封底裡","c":"pub"},{"id":21341138,"s":["設計學名詞"],"en":"inside front cover {=IFC}","zh":"封面內頁；封面裡","c":"pub"},{"id":21341352,"s":["設計學名詞"],"en":"outside back cover","zh":"封底頁","c":"pub"},{"id":21341690,"s":["設計學名詞"],"en":"tear sheet","zh":"報刊單印頁","c":"pub"},{"id":21341745,"s":["設計學名詞"],"en":"user manual","zh":"使用者手冊","c":"pub"},{"id":3609511,"s":["藝術學名詞"],"en":"author's proof","zh":"毛樣；初印版；初稿","c":"pub"},{"id":3610334,"s":["藝術學名詞"],"en":"proof reading","zh":"校樣","c":"pub"},{"id":3610336,"s":["藝術學名詞"],"en":"proofreading","zh":"校對","c":"pub"},{"id":21406688,"s":["藝術學名詞"],"en":"print media","zh":"平面媒體","c":"pub"},{"id":21406687,"s":["藝術學名詞"],"en":"print ad","zh":"平面廣告","c":"pub"},{"id":3608208,"s":["藝術學名詞"],"en":"color lithography","zh":"彩色石版印刷","c":"print"},{"id":3608567,"s":["藝術學名詞"],"en":"finishing","zh":"釘裝方法（印刷）；修整；粉飾（建築）","c":"print"},{"id":3608645,"s":["藝術學名詞","設計學名詞"],"en":"gravure","zh":"凹版印刷","c":"print"},{"id":3608816,"s":["藝術學名詞","設計學名詞"],"en":"letterpress","zh":"凸版印刷；凸版印刷{活版}","c":"print"},{"id":3609036,"s":["藝術學名詞"],"en":"offset","zh":"轉印","c":"print","n":"印刷語境的 offset 指「平版（膠印）印刷」"},{"id":3609383,"s":["藝術學名詞"],"en":"advanced copy","zh":"早期樣本；初樣（印刷）","c":"print"},{"id":3609558,"s":["藝術學名詞","設計學名詞"],"en":"bounce","zh":"移位（印刷）；移位 {印刷}","c":"print"},{"id":3609622,"s":["藝術學名詞","設計學名詞"],"en":"coated paper","zh":"再製紙；表面加工紙；塗層紙；塗料紙","c":"print"},{"id":3609637,"s":["藝術學名詞"],"en":"colour proof","zh":"多色打樣（印刷）","c":"print"},{"id":3609640,"s":["藝術學名詞","設計學名詞"],"en":"colour separation","zh":"彩色分色片；三色版分色（印刷）；分色","c":"print"},{"id":3609746,"s":["藝術學名詞"],"en":"dpi (dot per inch)","zh":"每吋點數","c":"print"},{"id":3609755,"s":["藝術學名詞","設計學名詞"],"en":"duotones","zh":"兩種色調；雙重調（印刷）；雙色調 {印刷}","c":"print"},{"id":3609956,"s":["藝術學名詞","設計學名詞"],"en":"image area","zh":"有效印刷範圍；影像區","c":"print"},{"id":3609958,"s":["藝術學名詞"],"en":"imagesetter","zh":"圖象排版輸出機","c":"print"},{"id":3609962,"s":["藝術學名詞","設計學名詞"],"en":"imposition","zh":"組版；整版","c":"print"},{"id":3610023,"s":["藝術學名詞","設計學名詞"],"en":"key numbers","zh":"索引號碼（印刷）；索引號碼{印刷}","c":"print"},{"id":3610144,"s":["藝術學名詞"],"en":"mock up","zh":"打樣（印刷）；樣張","c":"print"},{"id":3610325,"s":["藝術學名詞"],"en":"print design","zh":"印刷設計","c":"print"},{"id":3610327,"s":["藝術學名詞"],"en":"printing reproduction","zh":"印刷複製","c":"print"},{"id":3610331,"s":["藝術學名詞"],"en":"progressive proof","zh":"改樣（設計）","c":"print"},{"id":3610356,"s":["藝術學名詞"],"en":"raised printing","zh":"浮凸印刷","c":"print"},{"id":3610463,"s":["藝術學名詞"],"en":"silk screen printing","zh":"絹版印刷","c":"print"},{"id":3610705,"s":["藝術學名詞"],"en":"wood-free paper","zh":"書紙；道林紙","c":"print"},{"id":9063567,"s":["藝術學名詞","設計學名詞"],"en":"bleed","zh":"出血線（印刷）；出血","c":"print","n":"印刷常見出血 3 mm"},{"id":9063899,"s":["藝術學名詞"],"en":"flexography","zh":"柔版印刷","c":"print"},{"id":9064319,"s":["藝術學名詞"],"en":"overprint","zh":"套印","c":"print"},{"id":9064378,"s":["藝術學名詞"],"en":"pixels per inch (PPI)","zh":"數位像素密度","c":"print"},{"id":9064364,"s":["藝術學名詞"],"en":"photoengraving","zh":"照相凸版印刷","c":"print"},{"id":12018700,"s":["藝術學名詞"],"en":"accordion fold","zh":"風箱褶；風琴褶","c":"print"},{"id":12018804,"s":["藝術學名詞"],"en":"basis weight","zh":"基重；基礎重量（版畫紙張）","c":"print"},{"id":21323049,"s":["藝術學名詞"],"en":"mountain fold","zh":"山摺","c":"print"},{"id":21323051,"s":["藝術學名詞"],"en":"movable type","zh":"活版印刷","c":"print"},{"id":21323419,"s":["藝術學名詞"],"en":"shadow fold","zh":"暗摺","c":"print"},{"id":21323677,"s":["藝術學名詞"],"en":"V-Fold","zh":"V摺","c":"print"},{"id":21323679,"s":["藝術學名詞"],"en":"valley fold","zh":"谷摺","c":"print"},{"id":21322698,"s":["藝術學名詞"],"en":"folding over","zh":"摺疊","c":"print"},{"id":21369243,"s":["藝術學名詞"],"en":"halftone","zh":"半色調","c":"print"},{"id":21369267,"s":["藝術學名詞"],"en":"high-res picture","zh":"高解析度圖片","c":"print"},{"id":21405825,"s":["藝術學名詞","設計學名詞"],"en":"bond paper","zh":"銅版紙；證券紙","c":"print","n":"注意：bond paper 實務多稱「道林紙／證券紙」；「銅版紙」通常是 coated / art paper"},{"id":21406696,"s":["藝術學名詞","設計學名詞"],"en":"proof","zh":"稿樣；校樣；樣張","c":"print"},{"id":21406736,"s":["藝術學名詞","設計學名詞"],"en":"resolution","zh":"解析度","c":"print"},{"id":7195160,"s":["設計學名詞"],"en":"binding","zh":"裝釘；裝釘設計","c":"print"},{"id":7195515,"s":["設計學名詞"],"en":"digital printing","zh":"數位印刷","c":"print"},{"id":7195520,"s":["設計學名詞"],"en":"direct-to-plate printing","zh":"直接製版印刷","c":"print"},{"id":7195811,"s":["設計學名詞"],"en":"lithography","zh":"平版印刷術{石印}；微影術","c":"print"},{"id":7195937,"s":["設計學名詞","勞動部"],"en":"offset printing","zh":"平版印刷","c":"print"},{"id":7196138,"s":["設計學名詞"],"en":"relief printing","zh":"凸版印刷","c":"print"},{"id":7196161,"s":["設計學名詞"],"en":"rotogravure","zh":"凹版印刷","c":"print"},{"id":7196164,"s":["設計學名詞"],"en":"saddle stitch","zh":"騎馬釘；騎馬式裝訂","c":"print"},{"id":21340345,"s":["設計學名詞"],"en":"adhesive binding","zh":"膠裝","c":"print"},{"id":21340348,"s":["設計學名詞"],"en":"advance copy","zh":"初樣；樣本書","c":"print"},{"id":21340743,"s":["設計學名詞"],"en":"die cut","zh":"刀模；模切","c":"print"},{"id":21340774,"s":["設計學名詞"],"en":"dot density","zh":"網點密度{印刷}","c":"print"},{"id":21340775,"s":["設計學名詞"],"en":"dots per inch {=dpi}","zh":"每英吋點數{解析度單位}","c":"print","n":"印前常見：影像 300 ppi、印刷輸出以 dpi 表示"},{"id":21340832,"s":["設計學名詞"],"en":"embossed design","zh":"壓花設計{印刷}；浮雕設計","c":"print"},{"id":21340834,"s":["設計學名詞"],"en":"embossing","zh":"壓凸；打凸","c":"print"},{"id":21340983,"s":["設計學名詞"],"en":"foil stamping","zh":"燙金","c":"print"},{"id":21340984,"s":["設計學名詞"],"en":"fold","zh":"摺","c":"print"},{"id":21341047,"s":["設計學名詞"],"en":"halftone screen","zh":"半色調網版","c":"print"},{"id":21341074,"s":["設計學名詞"],"en":"high finish paper","zh":"高光紙","c":"print"},{"id":21341481,"s":["設計學名詞"],"en":"printing press","zh":"印刷機","c":"print"},{"id":21341707,"s":["設計學名詞"],"en":"thermal transfer printing","zh":"熱轉印","c":"print"},{"id":3608080,"s":["藝術學名詞"],"en":"bitmap images","zh":"點陣圖影像","c":"color"},{"id":3608214,"s":["藝術學名詞","設計學名詞"],"en":"colour scheme","zh":"色彩系統；色彩計劃；色彩計畫","c":"color"},{"id":3609621,"s":["藝術學名詞"],"en":"Cyan, Magenta, Yellow, Black (CMYK)","zh":"印刷四原色","c":"color"},{"id":3610386,"s":["藝術學名詞"],"en":"Red, Green, Blue (RGB)","zh":"色光三原色｛紅、綠、藍｝","c":"color"},{"id":3609336,"s":["藝術學名詞"],"en":"vector graphics","zh":"向量圖","c":"color"},{"id":3610467,"s":["藝術學名詞"],"en":"simultaneous color contrast","zh":"同時性對比","c":"color"},{"id":3610496,"s":["藝術學名詞"],"en":"Split-Complementary Color Scheme","zh":"補色分割模式","c":"color"},{"id":3610557,"s":["藝術學名詞"],"en":"Tetradic Color Scheme","zh":"矩形配色模式","c":"color"},{"id":3610607,"s":["藝術學名詞","設計學名詞"],"en":"Triadic Color Scheme","zh":"三等分配色模式；三等分配色","c":"color"},{"id":9063649,"s":["藝術學名詞"],"en":"CMY color model","zh":"色料三原色","c":"color"},{"id":9063669,"s":["藝術學名詞","設計學名詞"],"en":"color wheel","zh":"色相環；色環","c":"color"},{"id":9064467,"s":["藝術學名詞"],"en":"RGB color model","zh":"色光三原色","c":"color"},{"id":12019560,"s":["藝術學名詞"],"en":"raster graphics","zh":"點陣圖","c":"color"},{"id":21322336,"s":["藝術學名詞"],"en":"bitmap","zh":"點陣圖","c":"color"},{"id":21406317,"s":["藝術學名詞"],"en":"Itten's color wheel","zh":"伊登色相環","c":"color"},{"id":7195274,"s":["設計學名詞"],"en":"color contrast","zh":"色彩對比；色對比","c":"color"},{"id":7195278,"s":["設計學名詞"],"en":"color harmony","zh":"色彩調合","c":"color"},{"id":7195280,"s":["設計學名詞"],"en":"color management","zh":"色彩管理","c":"color"},{"id":7195420,"s":["設計學名詞"],"en":"cyan magenta yellow black {=CMYK}","zh":"印刷四分色模式","c":"color"},{"id":21340478,"s":["設計學名詞"],"en":"bitmap graphics","zh":"點陣圖","c":"color"},{"id":12019185,"s":["藝術學名詞","設計學名詞"],"en":"illustration","zh":"插圖；圖解；插畫","c":"color"},{"id":7195707,"s":["設計學名詞"],"en":"illustration design","zh":"插畫設計","c":"color"},{"id":7196438,"s":["設計學名詞"],"en":"visual texture","zh":"視覺質感","c":"color"},{"id":3608506,"s":["藝術學名詞"],"en":"environmental graphics","zh":"環境標誌","c":"ident"},{"id":3609666,"s":["藝術學名詞","設計學名詞"],"en":"corporate identity","zh":"組織識別；機構形象；企業識別","c":"ident"},{"id":3610076,"s":["藝術學名詞"],"en":"logotype","zh":"文字標誌","c":"ident"},{"id":3610459,"s":["藝術學名詞"],"en":"signage","zh":"標記；標牌","c":"ident"},{"id":9064032,"s":["藝術學名詞"],"en":"infographic","zh":"資訊圖表","c":"ident"},{"id":9064035,"s":["藝術學名詞"],"en":"Information graphics","zh":"資訊圖表","c":"ident"},{"id":7195152,"s":["設計學名詞"],"en":"behavior Identity {=BI}","zh":"行為識別","c":"ident"},{"id":7195188,"s":["設計學名詞"],"en":"brand identity","zh":"品牌識別","c":"ident"},{"id":7195192,"s":["設計學名詞"],"en":"brand mark","zh":"品牌標誌","c":"ident"},{"id":7195388,"s":["設計學名詞"],"en":"corporate identity system {=CIS}","zh":"企業識別系統","c":"ident"},{"id":7195659,"s":["設計學名詞"],"en":"graphic design","zh":"平面設計","c":"ident"},{"id":7195699,"s":["設計學名詞"],"en":"icon","zh":"圖標；圖示","c":"ident"},{"id":7195882,"s":["設計學名詞"],"en":"mind identity {=MI}","zh":"理念識別","c":"ident"},{"id":7196429,"s":["設計學名詞","勞動部"],"en":"visual communication design","zh":"視覺傳達設計","c":"ident"},{"id":7196434,"s":["設計學名詞"],"en":"visual identity {=VI}","zh":"視覺識別","c":"ident"},{"id":7196470,"s":["設計學名詞"],"en":"word cloud","zh":"文字雲","c":"ident"},{"id":21340860,"s":["設計學名詞"],"en":"environmental graphic design","zh":"環境指標設計","c":"ident"},{"id":21341122,"s":["設計學名詞"],"en":"infographic design","zh":"資訊圖表設計","c":"ident"},{"id":21341203,"s":["設計學名詞"],"en":"lettermark","zh":"字母商標","c":"ident"},{"id":21341220,"s":["設計學名詞"],"en":"logo","zh":"標誌","c":"ident"},{"id":21341415,"s":["設計學名詞"],"en":"pictogram","zh":"繪文字；象形文字","c":"ident"},{"id":21341722,"s":["設計學名詞"],"en":"trademark","zh":"商標","c":"ident"},{"id":21341787,"s":["設計學名詞"],"en":"word mark","zh":"字商標","c":"ident"},{"id":3608258,"s":["藝術學名詞","設計學名詞"],"en":"copyright","zh":"版權；著作權","c":"ident"},{"id":3610554,"s":["藝術學名詞"],"en":"template","zh":"模版","c":"digital"},{"id":3610683,"s":["藝術學名詞","勞動部"],"en":"web design","zh":"網頁設計","c":"digital"},{"id":21322195,"s":["藝術學名詞"],"en":"alternative text","zh":"替代性文本；替代性標籤","c":"digital"},{"id":21322556,"s":["藝術學名詞"],"en":"digital textbook","zh":"數位教科書","c":"digital"},{"id":21322610,"s":["藝術學名詞"],"en":"electronic book","zh":"電子書","c":"digital"},{"id":21322611,"s":["藝術學名詞"],"en":"electronic publishing","zh":"電子出版","c":"digital"},{"id":21323339,"s":["藝術學名詞"],"en":"responsive web design ={RWD}","zh":"響應式網頁設計；反饋式網頁設計","c":"digital"},{"id":21406923,"s":["藝術學名詞"],"en":"text-to-image","zh":"文字生成影像","c":"digital"},{"id":7195690,"s":["設計學名詞"],"en":"home page","zh":"首頁","c":"digital"},{"id":21340509,"s":["設計學名詞"],"en":"breadcrumb","zh":"頁面路徑；麵包屑導航","c":"digital"},{"id":21340667,"s":["設計學名詞"],"en":"cover flow","zh":"封面瀏覽","c":"digital"},{"id":21341194,"s":["設計學名詞"],"en":"landing page","zh":"到達頁；登陸頁","c":"digital"},{"id":0,"s":["勞動部"],"en":"National Skills Competition","zh":"全國技能競賽","c":"comp"},{"id":0,"s":["勞動部"],"en":"National Skills Competition for the Disabled","zh":"全國身心障礙者技能競賽","c":"comp"},{"id":0,"s":["勞動部"],"en":"National Competitor Selection","zh":"國手選拔賽","c":"comp","n":"國際展能節國手由全國身心障礙者技能競賽暨國手選拔賽產生"},{"id":0,"s":["勞動部"],"en":"WorldSkills Competition","zh":"國際技能競賽","c":"comp"},{"id":0,"s":["勞動部"],"en":"WorldSkills International","zh":"國際技能競賽組織","c":"comp"},{"id":0,"s":["勞動部"],"en":"WorldSkills Asia","zh":"國際技能組織亞洲分會","c":"comp"},{"id":0,"s":["勞動部"],"en":"International Abilympics","zh":"國際展能節","c":"comp","n":"本職類國手的國際賽事"},{"id":0,"s":["勞動部"],"en":"Vocational Skills Competition of International Abilympics","zh":"國際展能節職業技能競賽","c":"comp"},{"id":0,"s":["勞動部"],"en":"International Abilympics Federation","zh":"國際奧林匹克身心障礙聯合會","c":"comp"},{"id":0,"s":["勞動部"],"en":"People with Disabilities","zh":"身心障礙者","c":"comp"},{"id":0,"s":["勞動部"],"en":"National Certification of Professional Skills","zh":"全國技能檢定","c":"comp"},{"id":0,"s":["勞動部"],"en":"The Skills Certification","zh":"技能檢定","c":"comp"},{"id":0,"s":["勞動部"],"en":"Skills Certification for Designated Examinee","zh":"專案技能檢定","c":"comp"},{"id":0,"s":["勞動部"],"en":"Skills Certification Examinee","zh":"應檢人員","c":"comp"},{"id":0,"s":["勞動部"],"en":"Trades of Skills","zh":"技能職類","c":"comp"},{"id":0,"s":["勞動部"],"en":"Standards of Skills","zh":"技能標準","c":"comp"},{"id":0,"s":["勞動部"],"en":"Establishment guidelines of Skills Certification","zh":"規範製訂","c":"comp"},{"id":0,"s":["勞動部"],"en":"Occupational Competency Standard","zh":"職能基準","c":"comp"},{"id":0,"s":["勞動部"],"en":"National Qualifications Framework","zh":"國家資歷架構,NQF","c":"comp"},{"id":0,"s":["勞動部"],"en":"Certified Technician","zh":"技術士","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class A Certified Technician(Technologist)","zh":"甲級技術士","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class B Certified Technician(Technician)","zh":"乙級技術士","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class C Certified Technician(Skill Worker)","zh":"丙級技術士","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class A Technician Certificate","zh":"甲級技術士證","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class B Technician Certificate","zh":"乙級技術士證","c":"comp"},{"id":0,"s":["勞動部"],"en":"Class C Technician Certificate","zh":"丙級技術士證","c":"comp"},{"id":0,"s":["勞動部"],"en":"Written Test","zh":"學科測試","c":"comp"},{"id":0,"s":["勞動部"],"en":"Field Test","zh":"術科測試","c":"comp"},{"id":0,"s":["勞動部"],"en":"Common Subjects","zh":"共同科目","c":"comp"},{"id":0,"s":["勞動部"],"en":"Work Items","zh":"工作項目","c":"comp"},{"id":0,"s":["勞動部"],"en":"Related Knowledge","zh":"相關知識","c":"comp"},{"id":0,"s":["勞動部"],"en":"Professional Knowledge and Competency","zh":"專業知能","c":"comp"},{"id":0,"s":["勞動部"],"en":"Rules of Composing exam for Field Test","zh":"術科試題命製規則","c":"comp","n":"自編模擬題時可參考的命題規範"},{"id":0,"s":["勞動部"],"en":"Rules of Composing exam for Written Test","zh":"學科試題命製規則","c":"comp"},{"id":0,"s":["勞動部"],"en":"Quiz Bank Administrator","zh":"題庫管理人員","c":"comp"},{"id":0,"s":["勞動部"],"en":"Regulations for Handling Disputes Concerning National Examinations","zh":"國家考試試題疑義處理辦法","c":"comp"},{"id":0,"s":["勞動部"],"en":"Field Test Sites for Skills Certification","zh":"技能檢定術科測試場地","c":"comp"},{"id":0,"s":["勞動部"],"en":"Certificate of Qualified Sites","zh":"場地評鑑合格證書","c":"comp"},{"id":0,"s":["勞動部"],"en":"Equipment Evaluation Standards","zh":"設備評鑑標準","c":"comp"},{"id":0,"s":["勞動部"],"en":"Examination Agency","zh":"試務辦理單位","c":"comp"},{"id":0,"s":["勞動部"],"en":"Order of Examination Sites","zh":"試場秩序","c":"comp"},{"id":0,"s":["勞動部"],"en":"Regulations for Examination Sites","zh":"試場規則","c":"comp"},{"id":0,"s":["勞動部"],"en":"Preparatory Ring","zh":"預備鈴","c":"comp"},{"id":0,"s":["勞動部"],"en":"Invigilator and Marker","zh":"監場及評分人員","c":"comp"},{"id":0,"s":["勞動部"],"en":"Certificate of Invigilator and Marker","zh":"監評人員證書","c":"comp"},{"id":0,"s":["勞動部"],"en":"Invigilating and Marking Criteria","zh":"監評尺度","c":"comp","n":"評分標準的官方說法；讀國際賽 Marking Scheme 時可對照"},{"id":0,"s":["勞動部"],"en":"Invigilating and Marking System","zh":"監評制度","c":"comp"},{"id":0,"s":["勞動部"],"en":"Coordination Meeting prior to Invigilating and Marking","zh":"監評前協調會","c":"comp"},{"id":0,"s":["勞動部"],"en":"Screening Committee","zh":"甄選委員會","c":"comp"},{"id":0,"s":["勞動部"],"en":"Hand Grading","zh":"人工閱卷","c":"comp"},{"id":0,"s":["勞動部"],"en":"Computerized Grading","zh":"電腦閱卷/資訊設備閱卷","c":"comp"},{"id":0,"s":["勞動部"],"en":"Initial Grading","zh":"初閱","c":"comp"},{"id":0,"s":["勞動部"],"en":"Final Grading","zh":"複閱","c":"comp"},{"id":0,"s":["勞動部"],"en":"Card Reader","zh":"讀卡機","c":"comp"},{"id":0,"s":["勞動部"],"en":"Prepress Process","zh":"印前製程","c":"print"},{"id":0,"s":["勞動部"],"en":"Prepress Process－PC","zh":"印前製程-PC","c":"print"},{"id":0,"s":["勞動部"],"en":"Prepress Process－MAC","zh":"印前製程-MAC","c":"print"},{"id":0,"s":["勞動部"],"en":"Prepress Process－Image and Text Pagination PC","zh":"印前製程-圖文組版PC","c":"print","n":"技能檢定職類名稱，與本職類「編輯排版」內容最接近"},{"id":0,"s":["勞動部"],"en":"Prepress Process－Image and Text Pagination MAC","zh":"印前製程-圖文組版MAC","c":"print","n":"技能檢定職類名稱，與本職類「編輯排版」內容最接近"},{"id":0,"s":["勞動部"],"en":"Screen Plate-Making & Printing","zh":"網版製版印刷","c":"print"},{"id":0,"s":["勞動部"],"en":"Screen Plate-making & Printing－Plate-making","zh":"網版製版印刷-製版","c":"print"},{"id":0,"s":["勞動部"],"en":"Screen Plate-making & Printing－Printing","zh":"網版製版印刷-印刷","c":"print"},{"id":0,"s":["勞動部"],"en":"Visual Communication Design－Identity Design","zh":"視覺傳達設計-識別形象設計（PC／MAC）","c":"ident"},{"id":0,"s":["勞動部"],"en":"Visual Communication Design－Graphic Design","zh":"視覺傳達設計-平面設計（PC／MAC）","c":"ident"},{"id":0,"s":["勞動部"],"en":"Visual Communication Design－Package Design","zh":"視覺傳達設計-包裝設計（PC／MAC）","c":"ident"},{"id":0,"s":["勞動部"],"en":"Visual Communication Design－Illustration","zh":"視覺傳達設計-插畫（PC／MAC）","c":"ident"},{"id":0,"s":["勞動部"],"en":"Photography","zh":"攝影","c":"color"}];
+const EXAMS_SEED=[{"_id":"seed-2014-n13","year":2014,"event":"全國身心障礙者技能競賽","edition":"第13屆（暨第9屆國際展能節國手選拔賽）","date":"103/11/01","title":"寶島廟會文化：海報＋文字傳單","deliv":["海報","文字傳單","Logo標誌"],"sw":"Illustrator（Logo 指定），其餘自選","hrs":4.5,"kw":["文字特殊處理","圖像處理","表格","錯字扣分","PDF輸出","列印"],"focus":"兩件 A4 作品：海報 70 分（決定主題 10、創意構圖 20、文字內容 10、Logo 15、圖像處理 15）＋文字傳單 30 分（必備元素 5、版面設計 15、圖像處理 10）。\n主副標題只改字型、大小或顏色會得到較低評分；海報標題錯一字扣 2 分、內文錯一字扣 1 分。\n文字傳單必備：主標題、4 段文字與子標題、1 個表格與標題、3 張插圖。每件作品只能列印一次。","file":"02_全國身障賽_編輯排版/2018_第15屆/07_參考資料/編輯排版/15編輯排版/試題.pdf"},{"_id":"seed-2016-n14","year":2016,"event":"全國身心障礙者技能競賽","edition":"第14屆","date":"105/10/29","title":"國立中央大學尤努斯社會企業中心：兩摺式雙面宣傳單","deliv":["摺頁宣傳單","Logo標誌"],"sw":"Illustrator","hrs":4.5,"kw":["摺頁","摺頁標記","出血","裁切標記","表格","A3等比例雙面列印","裁切摺製成品"],"focus":"A4 橫放兩摺：外頁正面 14 cm、反面 15.7 cm，出血 0.5 cm。\n配分：版面設定 10、Logo 10、外頁正面 15、外頁反面 15、內頁 20、整體創新與協調性 20、作品列印 10。\n內左左側摺疊後會露在正面，必須同時考慮兩面的圖文；活動須以表格呈現。最多列印 3 次，須裁切並摺成實體宣傳單。","file":"02_全國身障賽_編輯排版/2016_第14屆/01_試題與說明/2016第14屆考題/試題.docx"},{"_id":"seed-2018-n15","year":2018,"event":"全國身心障礙者技能競賽","edition":"第15屆","date":"107/11/01","title":"珍好食安心食材推廣中心：N 字摺三摺宣傳單","deliv":["摺頁宣傳單","Logo標誌"],"sw":"Illustrator","hrs":4.5,"kw":["摺頁","N字摺","摺頁標記","出血","裁切標記","表格","PDF輸出","A3等比例雙面列印","裁切摺製成品"],"focus":"A4 橫放 N 字摺三等分，每份 210×99 mm，出血 0.3 cm。\n配分：版面設定 10、Logo 10、封面 15、封底 5、封底裡與內頁 15、封面裡與內頁裡 15、整體創新與協調性 20、作品列印 10。\n比上屆多了「另存含裁切標記、出血、摺頁標記的 PDF」；封面裡與內頁裡展開後在同一面，須一起設計。","file":"02_全國身障賽_編輯排版/2018_第15屆/01_試題與說明/2018第15屆01101確認/"},{"_id":"seed-2020-n16","year":2020,"event":"全國身心障礙者技能競賽","edition":"第16屆","date":"109/06/04","title":"親子共遊 Kids Travel：22 頁電子週刊","deliv":["電子週刊（多頁）","Logo標誌"],"sw":"InDesign、Illustrator","hrs":4.5,"kw":["多頁排版","對翻","目錄","頁碼","表格","SWF翻頁","互動式PDF","QR Code","章節版型"],"focus":"A4、22 頁、對翻：封面、序、目錄、18 頁內頁（3 章 6 小節，每小節 3 頁、至少 3 張照片）、封底。頁碼 10 pt，目錄頁之後的內文才算第 1 頁。\n配分：版面設定與繳交 10、Logo 10、封面 15、內頁編排 30（序、目錄頁碼、第 3 章表格）、封底 5、整體創新與協調性 30。\n主要交 SWF 翻頁檔，另交互動式 PDF 與 INDD。SWF 已於 2020 年底停用，練習時改用互動式 PDF。\n草稿版本原為 iPad 1536×2048 的 APP 介面設計（Illustrator），正式版改成電子週刊。","file":"02_全國身障賽_編輯排版/2020_第16屆/01_試題與說明/2020試題（來自第十六屆身障賽）.docx"},{"_id":"seed-2022-n17","year":2022,"event":"全國身心障礙者技能競賽","edition":"第17屆","date":"111/11/04","title":"深究大自然 Explore Nature：20 頁生態保育季刊","deliv":["電子季刊（多頁）","Logo標誌","資訊圖表"],"sw":"InDesign、Illustrator、Photoshop","hrs":5,"kw":["多頁排版","對翻","目錄","PDF書籤超連結","頁碼","影音置入","資訊圖表","孤行寡行","斜體學名","互動式PDF","QR Code"],"focus":"A4、20 頁、對翻：3 章 4 小節，每節至少 2 張照片，每章主頁獨立設計。頁碼 10–15 pt，封面、序、封底不標。\n配分：版面設定 5、Logo 10、封面 10、內頁編排 40（序、目錄頁碼、影音、資訊圖表）、封底 5、整體創新與協調性 25、作品繳交 5。\n第 2 章置入諸羅樹蛙 mp4；學名 Zhangixalus arvalis 須斜體。第 3 章標題頁後放 3 張自繪圖表：生態足跡概念圖、2018 土地足跡比例圖、2008–2018 生態足跡變化圖（須標單位：全球公頃／人）。\n首次明訂要處理孤行、寡行；比賽時間延長為 5 小時。","file":"02_全國身障賽_編輯排版/2022_第17屆/01_試題與說明/2022試題.pdf"},{"_id":"seed-2024-n18","year":2024,"event":"全國身心障礙者技能競賽","edition":"第18屆","date":"113/10/18","title":"超越感官：虛幻魔鏡互動體驗展 e-DM＋VIP 表單＋社群圖","deliv":["e-DM（多頁）","資訊圖表","互動PDF表單","社群圖"],"sw":"InDesign、Illustrator、Photoshop","hrs":5,"kw":["多頁排版","對翻","頁碼","資訊圖表","地圖置入","互動PDF表單","表單欄位","按鈕動作","QR Code","社群尺寸","孤行寡行","互動式PDF"],"focus":"A5 直式 8 頁 e-DM，閱讀方向橫式、可對翻；另做 1 頁 VIP 互動表單（A5）與 FB/IG 圖（1080×1920 px）。\n配分（評分表）：版面設定 5、資訊圖表 10、封面 10、序言與資訊圖表 5、內頁與頁碼 10、置入地圖 5、PDF 表單 10、封底 5、FB/IG 圖 10、整體創新與協調性 25、作品繳交 5。\n表單欄位：文字欄位、組合框（月、日、性別）、核取方塊（7 種職業可複選）、提交按鈕寄到 abc@gmail.com；封底按鈕要開啟 VIP.pdf。QR Code 不小於 25×25 mm。\n注意：試題內文寫的配分和評分表不同，以評分表為準。","file":"02_全國身障賽_編輯排版/2024_第18屆/01_試題與說明/2024試題c.docx"},{"_id":"seed-2026-n19","year":2026,"event":"全國身心障礙者技能競賽","edition":"第19屆（暨第11屆國際展能節國手選拔賽）","date":"115/10/22","title":"流嶼織造 ISLE & FLOW：中英雙語 ESG 企業永續形象手冊＋積分卡＋社群圖","deliv":["企業手冊（多頁）","Logo標誌","資訊圖表","互動PDF表單","社群圖"],"sw":"InDesign、Illustrator、Photoshop（以 Edge 檢查 PDF）","hrs":4.5,"kw":["多頁排版","對翻","中英雙語排版","主版自動頁碼","段落樣式","自動目錄","PDF書籤超連結","資訊圖表","表格","互動PDF表單","表單欄位","按鈕動作","社群尺寸","Logo多版本","孤行寡行"],"focus":"A4 直式 12 頁對頁手冊，第 4–11 頁為跨頁、左中文右英文。Logo 須做彩色、單色、反白三版，存在同一個 .ai。\n配分：版面設定 10、Logo 10、封面 5、序言與內頁 30、目錄與 PDF 書籤 5、封底 5、積分紀錄卡 15、社群圖 10、整體創新與協調性 10（客觀 90、主觀 10）。\n目錄必須用 InDesign 自動生成；積分卡要有姓名、部門下拉選單、週別、8 項行為 × 7 天共 56 個核取方塊，以及 Email 提交按鈕。社群圖 1200×628 px、72 dpi、RGB。\n同分時依序比較：整體創新 → 編排 → 積分卡 → 檔案完整度。","file":"02_全國身障賽_編輯排版/2026_第19屆（命題中，內部未調整）/需填寫繳交/2026試題說明.docx"},{"_id":"seed-2016-ab9","year":2016,"event":"國際展能節","edition":"第9屆 DTP（法國波爾多）","date":"2016/03","title":"Teich Bird Reserve 鳥類保護區：英文六面摺頁","deliv":["摺頁宣傳單"],"sw":"未載明（素材為 EPS／AI／TIFF）","hrs":null,"kw":["英文排版","摺頁","素材置入","清單排版","地圖置入","時刻表","合作單位Logo"],"focus":"六個面，面寬 100／100／97 mm × 210 mm（97 mm 為內摺面）。\n各面內容：封面（保護區 Logo、標題、網址、Ramsar 與地方公園 Logo）、312 種鳥類清單（分三類）、遷徙與 6 km 步道說明、參觀建議與月曆、開放資訊、交通與地圖。\n資料夾只有文字稿與素材清單，沒有評分表；比賽時數待查。","file":"01_國際賽/2016_第9屆國際展能節_DTP（法國・Teich鳥類保護區）/原始題目包/"},{"_id":"seed-2023-ab10","year":2023,"event":"國際展能節","edition":"第10屆 DTP（法國梅斯）","date":"2023/03","title":"Typoparty 2023 字體節：字標＋海報＋門票＋Facebook 貼文","deliv":["字標Wordmark","海報","門票","社群圖"],"sw":"InDesign、Illustrator、Photoshop、Acrobat","hrs":6,"kw":["英文排版","PDF/X-4","出血","裁切標記","色彩導表","CMYK","ICC色彩描述檔","補漏白","特別色Pantone","打孔線特別色","QR Code","社群尺寸","PSD圖層整理","資料夾管理"],"focus":"分兩天：第一天 4 小時完成字標＋海報，第二天 2 小時完成門票＋貼文。\n評分表共 42 項，主觀（J）50 分、客觀（M）50 分：字標 13、海報 28、門票 28、貼文 28、資料夾管理 3。\n海報 300×430 mm、出血 5 mm、ISO Coated v2 300、最高墨量 300%，交 PDF/X-4 含色彩導表。門票不超過 15×15 cm，用 2 個 Pantone，另設名為 Number（票號）和 perfo（打孔線）的特別色，QR Code 至少 25 mm。貼文 1200×717 px、Adobe RGB 1998，PSD 圖層須命名整齊。\n注意：題目前言寫海報 420×594 mm，技術規格與評分表則是 300×430 mm，以評分表為準。","file":"01_國際賽/2023_第10屆國際展能節_DTP（法國・Typoparty）/原始題目包/"},{"_id":"seed-2014-ws44","year":2014,"event":"全國技能競賽（平面設計技術）","edition":"第44屆分區賽","date":"2014","title":"錯視旋風：艾雪的魔幻世界畫展 標誌＋吉祥物＋海報","deliv":["Logo標誌","吉祥物","海報"],"sw":"向量軟體（未指定）","hrs":5,"kw":["特別色Pantone","CMYK","補漏白","出血","PDF/X-4","ICC色彩描述檔","網線數","油墨總量","QR Code","裝裱"],"focus":"標誌最長邊 12 cm，吉祥物最長邊 10–18 cm，兩者都要交 CMYK 與 2 色 Pantone 兩個版本。海報 37×26 cm，輸出在 A3。\n印前規格：175 lpi，影像 262–350 ppi，Bitmap 800–1200 ppi，U.S. Web Coated (SWOP) v2，總墨量 300%，交 PDF/X-4:2010。\n不接受 JPG 圖檔；成品裱貼在 520×680 mm 黑色裱板。屬於 WorldSkills 平面設計技術體系，可作為印前規範的進階練習。","file":"01_國際賽/WorldSkills_40平面設計技術/40.平面設計技術.pdf"},{"_id":"seed-2016-ws46","year":2016,"event":"全國技能競賽（平面設計技術）","edition":"第46屆暨第44屆國際技能競賽國手選拔賽","date":"2016","title":"卓手香 Handwork Bakery 形象包裝：標誌、名片、8 頁菜單、餐盒（試題一）","deliv":["Logo標誌","名片","菜單（多頁）","包裝盒"],"sw":"InDesign、Illustrator","hrs":7,"kw":["特別色Pantone","局部上光","刀模","PDF/X-1a","PDF/X-4","ICC色彩描述檔","補漏白","出血","段落樣式","主版頁碼","資料夾管理","裝裱"],"focus":"這是三題中的試題一（配分 35、7 小時）。\n標誌要 2 色 PMS 版和 CMYK 版；名片 85×55 mm、3 個特別色、只能用向量圖。菜單 260×90 mm 共 8 頁：封面封底 CMYK＋局部上光（特別色命名 Varnish），內頁用 2 個 Pantone，須用段落樣式、字元樣式與主版頁碼。餐盒用指定刀模（die cut）。\n每個 Task 資料夾都要分 Original／Final；試題二、三在同資料夾的「競賽試題及說明-2、-3」，尚未整理。","file":"01_國際賽/WorldSkills_40平面設計技術/競賽試題及說明-1.pdf"}];
+const CATS={comp:"賽制、檢定與評審",type:"字體與文字排印",layout:"版面與網格",pub:"出版物與書籍結構",print:"印刷、印前與後加工",color:"色彩與影像",ident:"識別與資訊設計",digital:"數位出版"};
+const $=s=>document.querySelector(s);
+const el=(t,a={},...kids)=>{const e=document.createElement(t);for(const[k,v]of Object.entries(a)){if(k==="class")e.className=v;else if(k==="text")e.textContent=v;else if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v)}for(const c of kids)if(c!=null)e.append(c);return e};
+const splitTags=s=>(s||"").split(/[,，、;；\n]/).map(x=>x.trim()).filter(Boolean);
+const fmtDate=t=>{try{const d=new Date(t);return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`}catch(e){return""}};
+const S={db:null,user:null,me:null,canWrite:null,teamTerms:[],exams:[],res:[],posts:[],profiles:{},cat:"",quiz:false,rcat:"",tscope:"全國身心障礙者技能競賽",open:new Set()};
+
+/* ---------- tabs ---------- */
+const TABS=["terms","exams","trends","resources","talk"];
+function show(t,click){if(!TABS.includes(t))t="terms";for(const b of document.querySelectorAll("#tabs button"))b.setAttribute("aria-selected",b.dataset.t===t);for(const id of TABS)$("#sec-"+id).hidden=id!==t;if(click){try{history.replaceState(null,"","#"+t)}catch(e){}const y=$("main").getBoundingClientRect().top+scrollY-$("nav.top").offsetHeight-8;if(scrollY>y)window.scrollTo({top:y})}}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b)show(b.dataset.t,true)});
+show((location.hash||"").slice(1));
+
+/* ---------- glossary ---------- */
+function catChips(){const box=$("#cats");box.textContent="";const mk=(k,l)=>{const b=el("button",{class:"chip","aria-pressed":S.cat===k,text:l,onclick:()=>{S.cat=k;catChips();renderTerms()}});box.append(b)};mk("","全部");for(const[k,v]of Object.entries(CATS))mk(k,v);mk("wda","勞動部詞彙");mk("team","團隊補充")}
+const sel=$("#t-c");for(const[k,v]of Object.entries(CATS))sel.append(el("option",{value:k,text:v}));
+const allExams=()=>EXAMS_SEED.map(x=>({...x,seed:true})).concat(S.exams).sort((a,b)=>(+b.year)-(+a.year));
+function allTerms(){return TERMS.concat(S.teamTerms.map(d=>({...d,team:true})))}
+function renderTerms(){
+  const q=$("#q").value.trim().toLowerCase();const box=$("#termList");box.textContent="";
+  let list=allTerms().filter(t=>(!S.cat||(S.cat==="team"?t.team:S.cat==="wda"?(t.s||[]).includes("勞動部"):t.c===S.cat))&&(!q||(t.en+" "+t.zh+" "+(t.n||"")).toLowerCase().includes(q)));
+  list.sort((a,b)=>a.en.localeCompare(b.en,"en",{sensitivity:"base"}));
+  $("#tcount").textContent=`${list.length} 筆`;$("#n-terms").textContent=allTerms().length;
+  if(!list.length){box.append(el("div",{class:"empty"},el("b",{text:"沒有符合的術語"}),"換個關鍵字，或用上方「補充一個術語」把它加進來。"));return}
+  for(const t of list){
+    const meta=el("div",{class:"meta"},el("span",{class:"tag cat",text:CATS[t.c]||t.c}),t.team?el("span",{class:"tag team",text:"團隊補充"}):el("span",{class:"tag"+(t.s.includes("勞動部")?" wda":""),text:t.s.join("＋")}));
+    const card=el("article",{class:"term"},el("div",{class:"en",text:t.en}),el("div",{class:"zh",text:t.zh,title:S.quiz?"點一下顯示中文":""}),meta,t.n?el("div",{class:"note",text:t.n}):null);
+    if(t.team&&canDelete(t))meta.append(el("button",{class:"linkbtn danger",text:"刪除",onclick:ev=>del("terms",t._id,ev.currentTarget)}));
+    card.querySelector(".zh").addEventListener("click",()=>card.classList.toggle("show"));
+    box.append(card)}
+}
+$("#q").addEventListener("input",renderTerms);
+$("#quizBtn").addEventListener("click",e=>{S.quiz=!S.quiz;e.currentTarget.setAttribute("aria-pressed",S.quiz);e.currentTarget.textContent=S.quiz?"顯示全部中文":"遮住中文練習";$("#termList").classList.toggle("quiz",S.quiz);for(const c of document.querySelectorAll(".term.show"))c.classList.remove("show")});
+catChips();renderTerms();
+
+/* ---------- people ---------- */
+async function names(ids){ids=[...new Set(ids.filter(Boolean))];if(!S.user||!ids.length)return;try{Object.assign(S.profiles,await S.user.profiles(ids))}catch(e){}}
+const nameOf=id=>S.local?"本機":(S.profiles[id]&&S.profiles[id].name)||(id&&id===S.me?"你":"團隊成員");
+const canDelete=d=>!!S.db&&S.canWrite!==false&&(S.local||d.by&&d.by===S.me||S.isOwner);
+
+/* ---------- discussion thread ---------- */
+function postsFor(ref){return S.posts.filter(p=>p.ref===ref)}
+function postNode(p){const prof=S.profiles[p.by];const av=el("img",{alt:"",src:prof?prof.avatarUrl:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23888'/%3E%3C/svg%3E"});
+  const who=el("div",{class:"who"},document.createTextNode(nameOf(p.by)),el("span",{text:fmtDate(p.at)}));
+  const body=el("div",{},who,el("div",{class:"txt",text:p.text}));
+  if(canDelete(p))who.append(" ",el("button",{class:"linkbtn danger",text:"刪除",onclick:ev=>del("posts",p._id,ev.currentTarget)}));
+  return el("div",{class:"post"},av,body)}
+function thread(ref){const box=el("div",{class:"thread"});for(const p of postsFor(ref))box.append(postNode(p));
+  if(S.db&&S.canWrite!==false){const ta=el("textarea",{maxlength:"2000",placeholder:"留言討論……","aria-label":"留言"});const f=el("form",{class:"reply"},ta,el("button",{class:"btn",type:"submit",text:"送出"}));
+    f.addEventListener("submit",async e=>{e.preventDefault();const t=ta.value.trim();if(!t)return;await add("posts",{ref,text:t},()=>{ta.value=""})});box.append(f)}
+  return box}
+function discussBtn(ref){const n=postsFor(ref).length;return el("button",{class:"linkbtn",text:(S.open.has(ref)?"收起討論":"討論")+` (${n})`,onclick:()=>{S.open.has(ref)?S.open.delete(ref):S.open.add(ref);renderAll()}})}
+
+/* ---------- exams ---------- */
+function renderExams(){
+  const q=$("#eq").value.trim().toLowerCase(),ev=$("#ef").value;const box=$("#examList");box.textContent="";
+  const AE=allExams();
+  const evs=[...new Set(AE.map(x=>x.event))];const f=$("#ef");const cur=f.value;f.length=1;for(const v of evs)f.append(el("option",{value:v,text:v}));f.value=evs.includes(cur)?cur:"";
+  $("#n-exams").textContent=AE.length||"";
+  const list=AE.filter(x=>(!ev||x.event===ev)&&(!q||JSON.stringify([x.title,x.deliv,x.kw,x.focus,x.sw,x.edition]).toLowerCase().includes(q)));
+  if(!list.length){box.append(el("div",{class:"empty"},el("b",{text:"沒有符合的考題"})));return}
+  for(const x of list){const ref="exam:"+x._id;
+    const dl=el("dl",{class:"kv"});const row=(k,v)=>{if(v)dl.append(el("dt",{text:k}),v instanceof Node?el("dd",{},v):el("dd",{text:v}))};
+    const tg=a=>{const t=el("div",{class:"tags"});for(const s of a)t.append(el("span",{class:"tag",text:s}));return t};
+    row("屆別／日期",[x.edition,x.date].filter(Boolean).join("　"));
+    row("成品類型",x.deliv&&x.deliv.length?tg(x.deliv):"");row("指定軟體",x.sw);row("競賽時間",x.hrs?x.hrs+" 小時":"");row("關鍵字",x.kw&&x.kw.length?tg(x.kw):"");row("評分重點",x.focus);
+    if(x.url)row("原始資料",el("a",{href:x.url,target:"_blank",rel:"noopener",text:x.url}));
+    if(x.file)row("原始檔案",el("span",{class:"small",text:"F:\\技能競賽\\"+x.file.replace(/\//g,"\\")}));
+    const acts=el("div",{class:"acts"},discussBtn(ref),el("span",{class:"small",text:x.seed?"內建考題（取自原始試題與評分表）":`${nameOf(x.by)} 登錄於 ${fmtDate(x.at)}`}));
+    if(!x.seed&&canDelete(x))acts.append(el("button",{class:"linkbtn danger",text:"刪除",onclick:e=>del("exams",x._id,e.currentTarget)}));
+    box.append(el("article",{class:"card"},el("div",{class:"top"},el("span",{class:"yr",text:x.year}),el("h3",{text:x.title}),el("span",{class:"ev",text:x.event})),dl,acts,S.open.has(ref)?thread(ref):null))}
+}
+$("#eq").addEventListener("input",renderExams);$("#ef").addEventListener("change",renderExams);
+
+/* ---------- trends ---------- */
+function bars(entries,max,hot){const b=el("div",{class:"bars"});for(const[k,v]of entries){b.append(el("div",{class:"brow"},el("span",{class:"lab",text:k,title:k}),el("span",{class:"track"},el("span",{class:"fill"+(hot&&hot.has(k)?" hot":""),style:`width:${Math.max(4,v/max*100)}%`})),el("span",{class:"v",text:v})))}return b}
+function countBy(arr,key){const m=new Map();for(const x of arr)for(const t of new Set((x[key]||[]).map(s=>s.toLowerCase()===s?s:s)))m.set(t,(m.get(t)||0)+1);return m}
+function renderTrends(){
+  const box=$("#trendBody");box.textContent="";
+  const evs=[...new Set(allExams().map(x=>x.event))];
+  const sel=el("select",{class:"chip","aria-label":"統計範圍"});sel.append(el("option",{value:"",text:"全部賽事"}));for(const v of evs)sel.append(el("option",{value:v,text:v}));sel.value=S.tscope;
+  sel.addEventListener("change",()=>{S.tscope=sel.value;renderTrends()});
+  box.append(el("div",{class:"bar"},el("span",{class:"cap mute",text:"統計範圍"}),sel));
+  const ex=allExams().filter(x=>!S.tscope||x.event===S.tscope);
+  if(ex.length<2){box.append(el("div",{class:"empty"},el("b",{text:ex.length?"再登錄一份考題就能開始比較":"登錄考題後這裡會自動產生統計"}),"會統計：各成品類型出現次數、關鍵字頻率、指定軟體、競賽時數，以及近三個年度與更早相比明顯變多的項目。"));return}
+  const years=[...new Set(ex.map(x=>+x.year))].sort((a,b)=>b-a);const recentYears=new Set(years.slice(0,3));
+  const recent=ex.filter(x=>recentYears.has(+x.year)),older=ex.filter(x=>!recentYears.has(+x.year));
+  const D=countBy(ex,"deliv"),K=countBy(ex,"kw");
+  const swM=new Map();for(const x of ex)for(const s of new Set((x.sw||"").match(/InDesign|Illustrator|Photoshop|Acrobat|Animate|Dreamweaver|Premiere|After Effects|Canva|Figma/gi)||[]))swM.set(s,(swM.get(s)||0)+1);
+  // rising
+  const rise=[];const DR=countBy(recent,"deliv"),DO=countBy(older,"deliv"),KR=countBy(recent,"kw"),KO=countBy(older,"kw");
+  const consider=(R,O,kind)=>{for(const[k,v]of R){const rr=v/Math.max(1,recent.length),orr=(O.get(k)||0)/Math.max(1,older.length);if(!older.length){rise.push({k,kind,s:rr,label:"st"});continue}
+    if(!O.get(k))rise.push({k,kind,s:rr+1,label:"new"});else if(rr-orr>0.15)rise.push({k,kind,s:rr-orr+.5,label:"up"});else if(rr>=.5)rise.push({k,kind,s:rr,label:"st"})}
+    if(older.length)for(const[k,v]of O){const orr=v/older.length,rr=(R.get(k)||0)/Math.max(1,recent.length);if(orr>=.5&&orr-rr>=.3)rise.push({k,kind,s:orr-rr,label:"down"})}};
+  consider(DR,DO,"成品");{const dk=new Set(D.keys());for(const k of[...KR.keys()])if(dk.has(k))KR.delete(k)}consider(KR,KO,"技能點");rise.sort((a,b)=>b.s-a.s);
+  const hot=new Set(rise.filter(r=>r.label==="new"||r.label==="up").map(r=>r.k));
+  const sorted=m=>[...m.entries()].sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const p1=el("div",{class:"panel"},el("h4",{text:"下一屆值得優先練的項目"}));
+  const LBL={new:"近期新出現",up:"比例上升",st:"持續常考",down:"近期變少"};const seenK=new Set();
+  for(const lab of["new","up","st","down"]){const items=rise.filter(r=>r.label===lab&&!seenK.has(r.k)).slice(0,6);if(!items.length)continue;
+    const ul=el("ul",{class:"pred"});for(const r of items){seenK.add(r.k);ul.append(el("li",{},el("span",{class:"pill "+r.label,text:LBL[r.label]}),el("span",{text:`${r.k}（${r.kind}）`})))}
+    p1.append(ul,el("div",{style:"height:14px"}))}
+  if(!rise.length)p1.append(el("p",{class:"small",text:"資料還不夠，先把成品類型與關鍵字欄位填完整。"}));
+  p1.append(el("p",{class:"small",text:`近期 = ${[...recentYears].sort().join("、")} 年（${recent.length} 份）；更早 ${older.length} 份。`}));
+  const dS=sorted(D),kS=sorted(K),sS=sorted(swM);
+  const p2=el("div",{class:"panel"},el("h4",{text:"成品類型出現次數"}),dS.length?bars(dS,dS[0][1],hot):el("p",{class:"small",text:"尚未填寫"}));
+  const p3=el("div",{class:"panel"},el("h4",{text:"關鍵字／技能點頻率"}),kS.length?bars(kS,kS[0][1],hot):el("p",{class:"small",text:"尚未填寫"}));
+  const p4=el("div",{class:"panel"},el("h4",{text:"指定軟體"}),sS.length?bars(sS,sS[0][1]):el("p",{class:"small",text:"尚未填寫"}));
+  // term heat
+  const text=ex.map(x=>[x.title,(x.deliv||[]).join(" "),(x.kw||[]).join(" "),x.focus].join(" ")).join("\n").toLowerCase();
+  const GEN=new Set(["文字","標記","字符","角色","性格","標題","說明","樣式","圖像","文本","切換","暫停","調整","基準","構圖","圖解","圖示","圖標","模版","版數","單張","手冊","文稿","稿樣","合字"]);const heat=[];const hseen=new Set();for(const t of allTerms()){const zs=t.zh.split(/[；;]/).map(s=>s.replace(/[（({｛].*$/,"").trim()).filter(s=>s.length>=2&&!GEN.has(s));const hk=(zs[0]||t.en).toLowerCase();if(hseen.has(hk))continue;let n=0;
+    const en=t.en.replace(/\{.*?\}|\(.*?\)/g,"").trim().toLowerCase();if(en.length>=4){n+=(text.match(new RegExp("\\b"+en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","g"))||[]).length}for(const z of zs)n+=text.split(z.toLowerCase()).length-1;if(n){hseen.add(hk);heat.push([`${zs[0]||t.zh} ${t.en.replace(/\s*[{(].*?[})]/g,"")}`,n])}}
+  heat.sort((a,b)=>b[1]-a[1]);const hS=heat.slice(0,12);
+  const p5=el("div",{class:"panel"},el("h4",{text:"術語熱度（術語庫 × 考題內容）"}),hS.length?bars(hS,hS[0][1]):el("p",{class:"small",text:"考題文字裡還沒有對到術語庫的詞彙。"}));
+  const hrs=ex.map(x=>+x.hrs).filter(Boolean);
+  const p6=el("div",{class:"panel"},el("h4",{text:"概況"}),el("dl",{class:"kv"},el("dt",{text:"考題份數"}),el("dd",{text:ex.length}),el("dt",{text:"涵蓋年度"}),el("dd",{text:`${years[years.length-1]}–${years[0]}`}),el("dt",{text:"平均時數"}),el("dd",{text:hrs.length?(hrs.reduce((a,b)=>a+b,0)/hrs.length).toFixed(1)+" 小時":"—"}),el("dt",{text:"賽事"}),el("dd",{text:[...new Set(ex.map(x=>x.event))].join("、")})));
+  box.append(el("div",{class:"tgrid"},p1,p6,p2,p3,p5,p4));
+}
+
+/* ---------- resources ---------- */
+function renderRes(){
+  const box=$("#resList");box.textContent="";$("#n-res").textContent=S.res.length||"";
+  const types=[...new Set(S.res.map(r=>r.type))];const rc=$("#rcats");rc.textContent="";
+  if(types.length>1){for(const[k,l]of[["","全部"],...types.map(t=>[t,t])])rc.append(el("button",{class:"chip","aria-pressed":S.rcat===k,text:l,onclick:()=>{S.rcat=k;renderRes()}}))}
+  const list=S.res.filter(r=>!S.rcat||r.type===S.rcat);
+  if(!S.res.length){box.append(el("div",{class:"empty"},el("b",{text:"資源庫目前是空的"}),"用上方「新增一筆資源」貼上第一個連結。"));return}
+  for(const r of list){const ref="res:"+r._id;let host="";try{host=new URL(r.url).hostname}catch(e){}
+    const acts=el("div",{class:"acts"},discussBtn(ref),el("span",{class:"small",text:`${nameOf(r.by)} · ${fmtDate(r.at)}`}));
+    if(canDelete(r))acts.append(el("button",{class:"linkbtn danger",text:"刪除",onclick:ev=>del("resources",r._id,ev.currentTarget)}));
+    box.append(el("article",{class:"card"},el("div",{class:"meta"},el("span",{class:"tag",text:r.type})),el("a",{class:"t",href:r.url,target:"_blank",rel:"noopener",text:r.title}),el("div",{class:"host",text:host}),r.note?el("p",{style:"margin:6px 0 0;font-size:14px",text:r.note}):null,acts,S.open.has(ref)?thread(ref):null))}
+}
+
+/* ---------- talk ---------- */
+function renderTalk(){
+  const box=$("#talkList");box.textContent="";$("#n-talk").textContent=S.posts.length||"";
+  if(!S.posts.length){box.append(el("div",{class:"empty"},el("b",{text:"還沒有人發言"}),"第一則可以是這一期的訓練目標或分工。"));return}
+  const label=ref=>{if(ref==="general")return"一般討論";const[k,id]=ref.split(":");if(k==="exam"){const x=allExams().find(e=>e._id===id);return x?`考題：${x.year} ${x.title}`:"考題（已刪除）"}if(k==="res"){const r=S.res.find(e=>e._id===id);return r?`資源：${r.title}`:"資源（已刪除）"}return ref};
+  for(const p of [...S.posts].reverse())box.append(el("div",{class:"card"},el("div",{class:"small",text:label(p.ref)}),postNode(p)));
+}
+
+function renderAll(){renderTerms();renderExams();renderTrends();renderRes();renderTalk()}
+
+/* ---------- writes ---------- */
+async function add(col,data,done){if(!S.db)return;try{await S.db.collection(col).add({...data,by:S.me||null,at:Date.now()});done&&done()}catch(e){const m=e&&e.code==="quota_exceeded"?"資料庫已滿，請先刪除舊資料。":e&&e.code==="invalid_argument"?"你的權限目前只能瀏覽，無法新增。":"沒有存成功，請稍後再試。";if(e&&e.code==="invalid_argument")S.canWrite=false;alertBox(m)}}
+async function del(col,id,b){if(!S.db)return;if(b&&b.dataset.arm!=="1"){b.dataset.arm="1";b.textContent="再按一次確認刪除";setTimeout(()=>{if(b.isConnected){b.dataset.arm="";b.textContent="刪除"}},3000);return}try{await S.db.doc(col+"/"+id).delete()}catch(e){alertBox("刪除失敗：可能沒有權限。")}}
+function alertBox(m){if(S.local){$("#localMsg").textContent=m;return}const n=$("#dbnote");n.hidden=false;n.textContent=m}
+
+$("#termForm").addEventListener("submit",e=>{e.preventDefault();const en=$("#t-en").value.trim(),zh=$("#t-zh").value.trim();if(!en||!zh)return;add("terms",{en,zh,c:$("#t-c").value,n:$("#t-n").value.trim()},()=>{e.target.reset();$("#t-err").textContent="已加入。"})});
+$("#examForm").addEventListener("submit",e=>{e.preventDefault();const d={year:+$("#e-year").value,event:$("#e-event").value,title:$("#e-title").value.trim(),deliv:splitTags($("#e-deliv").value),sw:$("#e-sw").value.trim(),hrs:$("#e-hrs").value?+$("#e-hrs").value:null,kw:splitTags($("#e-kw").value),url:$("#e-url").value.trim(),focus:$("#e-focus").value.trim()};if(!d.year||!d.title){$("#e-err").textContent="年度和題目名稱必填。";return}add("exams",d,()=>{e.target.reset();$("#e-err").textContent="已登錄。"})});
+$("#resForm").addEventListener("submit",e=>{e.preventDefault();const d={title:$("#r-title").value.trim(),url:$("#r-url").value.trim(),type:$("#r-type").value,note:$("#r-note").value.trim()};if(!/^https?:\/\//.test(d.url)){$("#r-err").textContent="連結要以 http:// 或 https:// 開頭。";return}add("resources",d,()=>{e.target.reset();$("#r-err").textContent="已加入。"})});
+$("#talkForm").addEventListener("submit",e=>{e.preventDefault();const t=$("#talkText").value.trim();if(!t)return;add("posts",{ref:"general",text:t},()=>{$("#talkText").value=""})});
+
+function setFormsEnabled(on){for(const id of["#addTerm","#addExam","#addRes"])$(id).hidden=!on;$("#talkBox").hidden=!on}
+
+/* ---------- boot ---------- */
+setFormsEnabled(false);renderAll();
+(async()=>{
+  const c=window.claude;let db=null,user=null;
+  if(c&&c.use){[db,user]=await Promise.all([c.use("db"),c.use("user")])}
+  if(!db){db=localDB();S.local=true;localBar()}
+  S.user=user;
+  if(user){try{S.me=await user.id();S.isOwner=await user.isOwner();S.canWrite=await user.can("data.write");const m=await user.me();if(m.name){const w=$("#who");w.textContent="";w.append("signed in",el("br"),m.name)}}catch(e){}}
+  S.db=db;setFormsEnabled(S.canWrite!==false);
+  if(S.canWrite===false)alertBox("你目前是瀏覽權限，可以閱讀全部內容，但無法新增或留言。");
+  const sub=(col,key,order,dir)=>db.collection(col).orderBy(order,dir).onSnapshot(async s=>{S[key]=s.docs.map(d=>({...d.data(),_id:d.id}));await names(S[key].map(x=>x.by));renderAll()},e=>alertBox("資料同步中斷，請重新整理頁面。"));
+  sub("terms","teamTerms","at","asc");sub("exams","exams","year","desc");sub("resources","res","at","desc");sub("posts","posts","at","asc");
+})();
+
+/* ---------- local mode (opened outside Claude: file:// or GitHub Pages) ---------- */
+function localDB(){
+  const KEY="ws-editorial-hub-v1";let data={};try{data=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+  const subs=[];const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}};
+  const snap=(c,f,d)=>{const rows=Object.entries(data[c]||{}).map(([id,v])=>({id,data:()=>v}));rows.sort((a,b)=>{const x=a.data()[f],y=b.data()[f];return (x>y?1:x<y?-1:0)*(d==="desc"?-1:1)});return{docs:rows}};
+  const fire=c=>{for(const s of subs)if(s.c===c)s.next(snap(c,s.f,s.d))};
+  const api={collection:c=>({add:async v=>{const id=Date.now().toString(36)+Math.random().toString(36).slice(2,7);(data[c]=data[c]||{})[id]=v;save();fire(c)},orderBy:(f,d)=>({onSnapshot:next=>{const s={c,f,d,next};subs.push(s);setTimeout(()=>next(snap(c,f,d)));return()=>{}}})}),
+    doc:p=>{const[c,id]=p.split("/");return{delete:async()=>{if(data[c])delete data[c][id];save();fire(c)}}},
+    _export:()=>JSON.stringify({app:"ws-editorial-hub",v:1,exported:new Date().toISOString(),data},null,1),
+    _import:(txt,merge)=>{const o=JSON.parse(txt);const inc=o.data||o;if(!merge)data={};for(const[c,docs]of Object.entries(inc)){data[c]=Object.assign(data[c]||{},docs)}save();for(const c of Object.keys(data))fire(c)}};
+  S._ldb=api;return api}
+function localBar(){const n=$("#dbnote");n.hidden=false;n.textContent="";
+  const fi=el("input",{type:"file",accept:".json,application/json",hidden:""});
+  fi.addEventListener("change",async()=>{const f=fi.files[0];if(!f)return;try{S._ldb._import(await f.text(),true);$("#localMsg").textContent=`已合併匯入 ${f.name}`}catch(e){$("#localMsg").textContent="匯入失敗：檔案不是這個培訓庫匯出的 JSON。"}fi.value=""});
+  const exp=el("button",{class:"btn ghost",type:"button",text:"匯出資料 (JSON)",onclick:()=>{const b=new Blob([S._ldb._export()],{type:"application/json"});const a=el("a",{href:URL.createObjectURL(b),download:`worldskills-hub-${new Date().toISOString().slice(0,10)}.json`});document.body.append(a);a.click();a.remove()}});
+  const imp=el("button",{class:"btn ghost",type:"button",text:"匯入並合併",onclick:()=>fi.click()});
+  n.append(el("b",{text:"本機模式　"}),"新增的考題、資源、留言只存在這台電腦的這個瀏覽器。要和教練、選手交換時，用匯出／匯入 JSON 檔。",el("div",{class:"bar",style:"margin:10px 0 0"},exp,imp,fi,el("span",{class:"small",id:"localMsg"})))}
+
+(function tick(){try{$("#clock").textContent=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Taipei",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date()).toUpperCase()}catch(e){}setTimeout(tick,30000)})();
+</script>
+</body>
+</html>
