@@ -144,6 +144,31 @@ form.grid select option{background:var(--bg)}
 footer{border-top:1px solid var(--ink);padding-block:14px 40px;color:var(--ink2);font-size:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 footer p{margin:0;grid-column:span 2}
 @media(max-width:760px){footer{grid-template-columns:1fr}footer p{grid-column:auto}}
+
+/* entry cards — original artwork with fixed palettes (deliberate, theme-independent like photographs) */
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:6vh;cursor:default}
+.scard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);min-width:0}
+.slab{display:flex;justify-content:space-between;gap:8px}
+.simg{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--bg2)}
+.simg svg{display:block;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.scard:hover .simg svg,.scard:focus-visible .simg svg{transform:scale(1.04)}
+.scap{display:flex;flex-direction:column;gap:1px;font-size:13px;line-height:1.4}
+.scap b{font-weight:500;font-size:15px}
+.scap .mute{font-size:12px}
+@media (prefers-reduced-motion:reduce){.simg svg{transition:none}.scard:hover .simg svg{transform:none}}
+@media(max-width:900px){.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px;scrollbar-width:none;margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+ .strip::-webkit-scrollbar{display:none}.scard{flex:0 0 62%;scroll-snap-align:start}}
+@media(min-width:601px) and (max-width:900px){.scard{flex-basis:38%}}
+.strip.drag{cursor:grabbing}.strip.drag .scard{pointer-events:none}
+.c-rule{stroke:var(--cr)}.c-crop{stroke:var(--ck);fill:none}.c-mute{fill:var(--cm)}.c-mute-s{stroke:var(--cm)}
+.c-bg{fill:var(--cb)}.c-ink{fill:var(--ck)}.c-inkf{fill:var(--ckf)}.c-acc{fill:var(--ca)}.c-accf{fill:var(--ca)}.c-acc-s{stroke:var(--ca)}
+.c-paper{fill:var(--cp)}.c-paper2{fill:var(--cp2)}.c-paper3{fill:var(--cp3)}.c-paper-t{fill:var(--cp)}.c-spine{fill:#111}.c-base{stroke:var(--ck)}
+.k1{--cb:#cfd3c0;--ck:#111;--ckf:#111;--cm:#5d5a52;--ca:#263b1c;--cr:#9aa08a}
+.k2{--cb:#151613;--ck:#e7e3d9;--ckf:#3a3a34;--cm:#9e9a8f;--ca:#b5cc98;--cr:#333;--cp:#efece4;--cp2:#3a3d34;--cp3:#e2ded3}
+.k3{--cb:#e9e6de;--ck:#111;--ckf:#111;--cm:#8a867b;--ca:#263b1c;--cr:#cbc6b9}
+.k4{--cb:#263b1c;--ck:#e7e3d9;--ckf:#111;--cm:#b5cc98;--ca:#b5cc98;--cr:#3c5530;--cp:#efece4;--cp2:#d8d3c6;--cp3:#c9c3b4}
+.k5{--cb:#f4f2ec;--ck:#111;--ckf:#111;--cm:#8a867b;--ca:#8c2a14;--cr:#ddd}
+.k4 .c-accf{fill:#b5cc98}
 </style>
 </head>
 <body>
@@ -167,6 +192,96 @@ footer p{margin:0;grid-column:span 2}
     <div class="cap mute">indesign · illustrator · photoshop</div>
     <div class="cap" style="text-align:right">abilympics · worldskills<br><span class="mute">national selection</span></div>
   </div>
+  <nav class="strip" id="strip" aria-label="區塊入口">
+  <a class="scard k1" href="#terms" data-go="terms">
+    <span class="slab cap"><span>01 glossary</span><span class="mute" data-count="n-terms"></span></span>
+    <span class="simg"><svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<rect class="c-bg" width="400" height="500"/>
+<text x="24" y="104" class="c-acc" font-family="Noto Sans TC, sans-serif" font-weight="300" font-size="64">字</text>
+<g class="c-rule" stroke-width="1">
+ <line x1="24" y1="177" x2="376" y2="177"/><line x1="24" y1="219" x2="376" y2="219" stroke-dasharray="4 4"/>
+ <line x1="24" y1="330" x2="376" y2="330"/><line x1="24" y1="372" x2="376" y2="372" stroke-dasharray="4 4"/>
+</g>
+<text x="30" y="330" class="c-ink" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-weight="300" font-size="210" letter-spacing="-8">Aa</text>
+<g class="c-mute" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="11" letter-spacing=".6">
+ <text x="376" y="171" text-anchor="end">CAP HEIGHT</text><text x="376" y="213" text-anchor="end">X-HEIGHT</text>
+ <text x="376" y="324" text-anchor="end">BASELINE</text><text x="376" y="366" text-anchor="end">DESCENDER</text>
+</g>
+<g class="c-acc" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="12"><text x="24" y="460">kerning · leading · bleed</text></g></svg></span>
+    <span class="scap"><b>術語庫</b><span class="mute">中英術語、樂詞網＋勞動部詞彙</span></span>
+  </a>
+  <a class="scard k2" href="#exams" data-go="exams">
+    <span class="slab cap"><span>02 archive</span><span class="mute" data-count="n-exams"></span></span>
+    <span class="simg"><svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<rect class="c-bg" width="400" height="500"/>
+<g transform="translate(200 250) rotate(-8)">
+ <rect x="-150" y="-110" width="300" height="200" class="c-paper2"/>
+</g>
+<g transform="translate(200 260) rotate(4)">
+ <rect x="-150" y="-100" width="100" height="200" class="c-paper"/>
+ <rect x="-50" y="-100" width="100" height="200" class="c-paper3"/>
+ <rect x="50" y="-100" width="100" height="200" class="c-paper"/>
+ <g class="c-rule" stroke-width="1" stroke-dasharray="3 3"><line x1="-50" y1="-100" x2="-50" y2="100"/><line x1="50" y1="-100" x2="50" y2="100"/></g>
+ <g class="c-crop" stroke-width="1">
+  <path d="M-150 -112 v-14 M-162 -100 h-14 M150 -112 v-14 M162 -100 h14 M-150 112 v14 M-162 100 h-14 M150 112 v14 M162 100 h14"/>
+ </g>
+ <g class="c-inkf"><rect x="-136" y="-84" width="60" height="8"/><rect x="-136" y="-70" width="44" height="4"/><rect x="-136" y="-62" width="52" height="4"/><rect x="-136" y="-54" width="38" height="4"/></g>
+ <circle cx="0" cy="-30" r="28" class="c-accf"/>
+ <g class="c-inkf"><rect x="-36" y="20" width="72" height="4"/><rect x="-36" y="30" width="60" height="4"/><rect x="-36" y="40" width="66" height="4"/></g>
+ <rect x="64" y="-84" width="72" height="96" class="c-accf" opacity=".35"/>
+ <g class="c-inkf"><rect x="64" y="24" width="56" height="4"/><rect x="64" y="34" width="70" height="4"/></g>
+</g>
+<g class="c-ink" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-weight="300" font-size="44" letter-spacing="-1.5"><text x="24" y="470">2014—2026</text></g></svg></span>
+    <span class="scap"><b>歷屆考題</b><span class="mute">2014—2026 國內外考題拆解</span></span>
+  </a>
+  <a class="scard k3" href="#trends" data-go="trends">
+    <span class="slab cap"><span>03 forecast</span><span class="mute" data-count=""></span></span>
+    <span class="simg"><svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<rect class="c-bg" width="400" height="500"/>
+<g class="c-rule" stroke-width="1">
+ <line x1="40" y1="120" x2="360" y2="120"/><line x1="40" y1="200" x2="360" y2="200"/><line x1="40" y1="280" x2="360" y2="280"/><line x1="40" y1="360" x2="360" y2="360"/>
+</g>
+<g class="c-mute" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="11" letter-spacing=".5">
+ <text x="40" y="384">2014</text><text x="146" y="384">2018</text><text x="252" y="384">2022</text><text x="330" y="384">2026</text>
+</g>
+<polyline points="40,330 93,318 146,322 199,268 252,214 305,190 358,132" fill="none" class="c-acc-s" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="40,170 93,180 146,186 199,246 252,300 305,318 358,330" fill="none" class="c-mute-s" stroke-width="1.5" stroke-dasharray="5 5"/>
+<g class="c-accf"><circle cx="252" cy="214" r="5"/><circle cx="305" cy="190" r="5"/><circle cx="358" cy="132" r="8"/></g>
+<g font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="12"><text x="352" y="112" text-anchor="end" class="c-acc">interactive PDF ↑</text><text x="352" y="350" text-anchor="end" class="c-mute">folded leaflet ↓</text></g>
+<g class="c-ink" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-weight="300" font-size="44" letter-spacing="-1.5"><text x="24" y="470">next?</text></g></svg></span>
+    <span class="scap"><b>趨勢預測</b><span class="mute">從歷屆題型看下一屆</span></span>
+  </a>
+  <a class="scard k4" href="#resources" data-go="resources">
+    <span class="slab cap"><span>04 resources</span><span class="mute" data-count="n-res"></span></span>
+    <span class="simg"><svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect class="c-bg" width="400" height="500"/><rect x="40" y="140" width="38" height="260" class="c-paper"/><rect x="78" y="100" width="32" height="300" class="c-accf"/><rect x="110" y="170" width="22" height="230" class="c-inkf"/><rect x="132" y="120" width="44" height="280" class="c-paper3"/><rect x="176" y="150" width="36" height="250" class="c-paper"/><rect x="212" y="90" width="42" height="310" class="c-paper2"/><rect x="254" y="160" width="28" height="240" class="c-accf"/><rect x="282" y="110" width="44" height="290" class="c-paper"/><rect x="326" y="130" width="34" height="270" class="c-inkf"/>
+<g transform="rotate(-90)" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="11" letter-spacing="1">
+ <text x="-388" y="99" class="c-paper-t">TD 40 · GRAPHIC DESIGN</text>
+ <text x="-388" y="158" class="c-spine">INDESIGN CC</text>
+ <text x="-388" y="236" class="c-spine">PREPRESS · PDF/X-4</text>
+ <text x="-388" y="309" class="c-spine">TYPOGRAPHY</text>
+</g>
+<line x1="24" y1="400" x2="376" y2="400" class="c-base" stroke-width="2"/>
+<g class="c-ink" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-weight="300" font-size="44" letter-spacing="-1.5"><text x="24" y="470">library</text></g></svg></span>
+    <span class="scap"><b>資源庫</b><span class="mute">規範、教程、範例作品</span></span>
+  </a>
+  <a class="scard k5" href="#talk" data-go="talk">
+    <span class="slab cap"><span>05 discussion</span><span class="mute" data-count="n-talk"></span></span>
+    <span class="simg"><svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<rect class="c-bg" width="400" height="500"/>
+<text x="20" y="300" class="c-acc" font-family="Inter Tight, Helvetica Neue, Georgia, serif" font-weight="300" font-size="340">“</text>
+<g font-family="Noto Sans TC, sans-serif" font-weight="300" font-size="30" class="c-ink">
+ <text x="60" y="250">這一屆的</text><text x="60" y="296">表單欄位</text><text x="60" y="342">要怎麼練？</text>
+</g>
+<g class="c-acc-s" fill="none" stroke-width="2" stroke-linecap="round">
+ <path d="M58 304 h124"/>
+ <path d="M186 268 q 22 -24 44 0"/>
+ <circle cx="238" cy="330" r="16"/>
+</g>
+<g class="c-acc" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-size="12"><text x="262" y="334">stet</text><text x="234" y="258">#</text></g>
+<g class="c-ink" font-family="Inter Tight, Helvetica Neue, Arial, sans-serif" font-weight="300" font-size="44" letter-spacing="-1.5"><text x="24" y="470">notes</text></g></svg></span>
+    <span class="scap"><b>討論區</b><span class="mute">訓練進度與出題猜測</span></span>
+  </a>
+</nav>
 </header>
 
 <main class="wrap">
@@ -394,7 +509,7 @@ function renderTalk(){
   for(const p of [...S.posts].reverse())box.append(el("div",{class:"card"},el("div",{class:"small",text:label(p.ref)}),postNode(p)));
 }
 
-function renderAll(){renderTerms();renderExams();renderTrends();renderRes();renderTalk()}
+function renderAll(){renderTerms();renderExams();renderTrends();renderRes();renderTalk();if(typeof syncCounts==="function")syncCounts()}
 
 /* ---------- writes ---------- */
 async function add(col,data,done){if(!S.db)return;try{await S.db.collection(col).add({...data,by:S.me||null,at:Date.now()});done&&done()}catch(e){const m=e&&e.code==="quota_exceeded"?"資料庫已滿，請先刪除舊資料。":e&&e.code==="invalid_argument"?"你的權限目前只能瀏覽，無法新增。":"沒有存成功，請稍後再試。";if(e&&e.code==="invalid_argument")S.canWrite=false;alertBox(m)}}
@@ -441,6 +556,18 @@ function localBar(){const n=$("#dbnote");n.hidden=false;n.textContent="";
   n.append(el("b",{text:"本機模式　"}),"新增的考題、資源、留言只存在這台電腦的這個瀏覽器。要和教練、選手交換時，用匯出／匯入 JSON 檔。",el("div",{class:"bar",style:"margin:10px 0 0"},exp,imp,fi,el("span",{class:"small",id:"localMsg"})))}
 
 (function tick(){try{$("#clock").textContent=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Taipei",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date()).toUpperCase()}catch(e){}setTimeout(tick,30000)})();
+
+/* entry cards: jump to section, show counts, drag to scroll */
+(function(){const strip=$("#strip");if(!strip)return;
+  strip.addEventListener("click",e=>{const a=e.target.closest("a[data-go]");if(!a)return;e.preventDefault();if(strip.dataset.moved==="1")return;show(a.dataset.go,true);const y=$("main").getBoundingClientRect().top+scrollY-$("nav.top").offsetHeight-8;window.scrollTo({top:y,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
+  let down=false,sx=0,sl=0;
+  strip.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"||strip.scrollWidth<=strip.clientWidth)return;down=true;sx=e.clientX;sl=strip.scrollLeft;strip.dataset.moved="0"});
+  addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4){strip.dataset.moved="1";strip.classList.add("drag")}strip.scrollLeft=sl-dx});
+  addEventListener("pointerup",()=>{if(!down)return;down=false;strip.classList.remove("drag");setTimeout(()=>strip.dataset.moved="0",0)});
+})();
+function syncCounts(){for(const s of document.querySelectorAll("[data-count]")){const id=s.dataset.count;if(id){const v=$("#"+id).textContent;s.textContent=v?v+" 筆":""}}}
+
+syncCounts();
 </script>
 </body>
 </html>
