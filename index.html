@@ -562,7 +562,7 @@ function localBar(){const n=$("#dbnote");n.hidden=false;n.textContent="";
   fi.addEventListener("change",async()=>{const f=fi.files[0];if(!f)return;try{S._ldb._import(await f.text(),true);$("#localMsg").textContent=`已合併匯入 ${f.name}`}catch(e){$("#localMsg").textContent="匯入失敗：檔案不是這個培訓庫匯出的 JSON。"}fi.value=""});
   const exp=el("button",{class:"btn ghost",type:"button",text:"匯出資料 (JSON)",onclick:()=>{const b=new Blob([S._ldb._export()],{type:"application/json"});const a=el("a",{href:URL.createObjectURL(b),download:`worldskills-hub-${new Date().toISOString().slice(0,10)}.json`});document.body.append(a);a.click();a.remove()}});
   const imp=el("button",{class:"btn ghost",type:"button",text:"匯入並合併",onclick:()=>fi.click()});
-  n.append(el("b",{text:"本機模式　"}),"新增的考題、資源、留言只存在這台電腦的這個瀏覽器。要和教練、選手交換時，用匯出／匯入 JSON 檔。",el("div",{class:"bar",style:"margin:10px 0 0"},exp,imp,fi,el("span",{class:"small",id:"localMsg"})))}
+  n.append(el("div",{class:"bar",style:"margin:0"},exp,imp,fi,el("span",{class:"small",id:"localMsg"})))}
 
 (function tick(){try{$("#clock").textContent=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Taipei",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date()).toUpperCase()}catch(e){}setTimeout(tick,30000)})();
 
