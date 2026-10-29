@@ -42,8 +42,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero h1 .zh{display:block;font-family:"Noto Sans TC",var(--f-display);font-size:.42em;letter-spacing:-.01em;font-weight:300;margin-top:.35em}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .herofoot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:6vh;align-items:end}
+.herofoot .hf-spacer{grid-column:span 2}
 .herofoot p{margin:0;max-width:44ch;grid-column:span 2;font-size:17px;font-weight:300;line-height:1.5;letter-spacing:-.005em}
-@media(max-width:760px){.herofoot{grid-template-columns:1fr 1fr}.herofoot p{grid-column:1/-1}}
+@media(max-width:760px){.herofoot{grid-template-columns:1fr 1fr}.herofoot p{grid-column:1/-1}.herofoot .hf-spacer{display:none}}
 main{padding-block:0 80px}
 section[hidden]{display:none}
 .sechead{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;border-top:1px solid var(--ink);padding-top:12px;margin-bottom:34px}
@@ -195,7 +196,7 @@ footer p{margin:0;grid-column:span 2}
 <header class="wrap hero">
   <h1>editorial <em>layout</em><span class="zh">編輯排版國手培訓庫</span></h1>
   <div class="herofoot">
-    <p>把國際命題用語、歷屆考題、參考資源與討論放在同一處。考題登錄得越完整，趨勢預測越能看出下一屆可能的出題方向。</p>
+    <div class="hf-spacer" aria-hidden="true"></div>
     <div class="cap mute">indesign · illustrator · photoshop</div>
     <div class="cap" style="text-align:right">abilympics · worldskills<br><span class="mute">national selection</span></div>
   </div>
@@ -295,7 +296,7 @@ footer p{margin:0;grid-column:span 2}
   <div class="notice" id="dbnote" hidden></div>
 
   <section id="sec-terms">
-    <div class="sechead"><h2>glossary<small>中英術語庫</small></h2><p>國際賽的題目卷、技術規範和評分表都用英文寫。這裡收錄國教院樂詞網「藝術學名詞」「設計學名詞」中與編輯排版相關的術語，以及勞動部勞動力發展署雙語詞彙裡的競賽、技能檢定、印前用語。標示縮寫的「考題關鍵字」附有解釋、相關考題與出處連結。團隊也可以自行補充。</p></div>
+    <div class="sechead"><h2>glossary<small>中英術語庫</small></h2><p>以下收錄國教院樂詞網「藝術學名詞」「設計學名詞」中與編輯排版相關的術語，以及勞動部勞動力發展署雙語詞彙裡的競賽、技能檢定、印前用語。國際賽題目卷、技術規範和評分表都須使用英文，請反覆練習。</p></div>
     <div class="bar">
       <input class="search" id="q" type="search" placeholder="搜尋 bleed、字距、imposition……" aria-label="搜尋術語">
       <button class="btn ghost" id="quizBtn" aria-pressed="false">遮住中文練習</button>
